@@ -11,6 +11,10 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def index
+    @articles = Article.order('id DESC')
+  end
+
   private
 
   def article_params
