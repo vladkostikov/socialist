@@ -4,7 +4,10 @@
   <article>
     <h3><%= article.title %></h3>
     <p><%= article.text %></p>
-    <a href="/articles/<%= article.id %>">Комментарии</a>
+    <p>
+      <%= link_to 'Комментарии', article_path(article) %>
+      <%= link_to 'Редактировать', edit_article_path(article) %>
+    </p>
     <hr/>
   </article>
 <% end %>

@@ -1,6 +1,6 @@
 <h1>Редактирование публикации</h1>
 
-<%= form_for :article, url: "/articles/#{@article.id}", method: :PUT, data: { turbo: false }  do |f| %>
+<%= form_for :article, url: article_path(@article), method: :PUT, data: { turbo: false } do |f| %>
   <p>
     <%= f.label :title %><br/>
     <%= f.text_field :title %>

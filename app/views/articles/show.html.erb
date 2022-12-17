@@ -1,2 +1,5 @@
 <h1><%= @article.title %></h1>
 <p><%= @article.text %></p>
+<br/>
+<p><%= link_to 'Редактировать публикацию', edit_article_path(@article) %></p>
+<p><%= link_to '< назад к публикациям', articles_path %></p>
