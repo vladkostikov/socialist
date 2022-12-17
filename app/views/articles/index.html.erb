@@ -5,9 +5,12 @@
     <h3><%= article.title %></h3>
     <p><%= article.text %></p>
     <p>
-      <%= link_to 'Комментарии', article_path(article) %>
       <%= link_to 'Редактировать', edit_article_path(article) %>
+      <%= link_to 'Удалить', article_path(article),
+                  data: {turbo_method: :delete,
+                         turbo_confirm: 'Вы точно хотите удалить публикацию?'} %>
     </p>
+    <p><%= link_to 'Комментарии', article_path(article) %></p>
     <hr/>
   </article>
 <% end %>
