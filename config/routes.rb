@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/about' => 'pages#about'
 
   resources :articles do
-    resources :comments
+    resource :comments, only: [:create]
   end
   resource :contacts, only: [:new, :create], path_names: { :new => '' }
   resource :terms, only: [:show]
