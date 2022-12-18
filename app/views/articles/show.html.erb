@@ -9,6 +9,7 @@
 </p>
 <p><%= link_to '< назад к публикациям', articles_path %></p>
 
+<h2>Комментарии:</h2>
 <p>
   <%= form_for([@article, @article.comments.build]) do |f| %>
     <p>
@@ -24,3 +25,12 @@
     </p>
   <% end %>
 </p>
+
+<% @comments.each do |comment| %>
+  <comment>
+    <p><strong><%= comment.author %></strong></p>
+    <p><%= comment.body %></p>
+    <p><%= comment.created_at %></p>
+    <hr/>
+  </comment>
+<% end %>
