@@ -8,3 +8,19 @@
                      turbo_confirm: 'Вы точно хотите удалить публикацию?'} %>
 </p>
 <p><%= link_to '< назад к публикациям', articles_path %></p>
+
+<p>
+  <%= form_for([@article, @article.comments.build]) do |f| %>
+    <p>
+      <%= f.label :author %><br/>
+      <%= f.text_field :author %>
+    </p>
+    <p>
+      <%= f.label :body %><br/>
+      <%= f.text_area :body %>
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+  <% end %>
+</p>

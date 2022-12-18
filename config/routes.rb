@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   get '/' => 'home#index'
   get '/about' => 'pages#about'
 
-  resources :articles
+  resources :articles do
+    resources :comments
+  end
   resource :contacts, only: [:new, :create], path_names: { :new => '' }
   resource :terms, only: [:show]
 
