@@ -11,9 +11,12 @@
   </head>
 
   <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+    <a href="/users/sign_in">Войти</a> |
+    <a href="/users/sign_out" data-turbo-method="DELETE">Выйти</a>
 
-  <%= yield %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <%= yield %>
   </body>
 </html>
