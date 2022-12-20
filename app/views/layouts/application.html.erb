@@ -11,8 +11,8 @@
   </head>
 
   <body>
-    <a href="/users/sign_in">Войти</a> |
-    <a href="/users/sign_out" data-turbo-method="DELETE">Выйти</a>
+    <%= link_to 'Войти', new_user_session_path %> |
+    <%= link_to 'Выйти', destroy_user_session_path, data: { turbo_method: :delete} %>
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
