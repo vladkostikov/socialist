@@ -13,9 +13,6 @@
 <p>
   <%= form_for([@article, @article.comments.build]) do |f| %>
     <p>
-      <%= f.hidden_field :author, value: current_user.username if current_user %>
-    </p>
-    <p>
       <%= f.label :body %><br/>
       <%= f.text_area :body %>
     </p>
