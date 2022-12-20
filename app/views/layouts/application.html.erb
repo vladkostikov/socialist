@@ -13,7 +13,7 @@
   <body>
     <p>
       <% if user_signed_in? %>
-        Привет, <%= current_user.email %> |
+        Привет, <%= current_user.username %> |
         <%= link_to 'Выйти', destroy_user_session_path,
                     data: { turbo_method: :delete,
                             turbo_confirm: 'Вы точно хотите выйти?'} %>
