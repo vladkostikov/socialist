@@ -13,11 +13,11 @@
 <p>
   <%= form_for([@article, @article.comments.build]) do |f| %>
     <p>
-      <%= f.label :body %><br/>
-      <%= f.text_area :body %>
+      <%= f.text_area :body, size: '40x3',
+                      placeholder: 'Введите текст комментария' %>
     </p>
     <p>
-      <%= f.submit %>
+      <%= f.submit 'Добавить комментарий' %>
     </p>
   <% end %>
 </p>
