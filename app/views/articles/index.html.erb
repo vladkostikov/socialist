@@ -2,8 +2,8 @@
 
 <% @articles.each do |article| %>
   <article>
-    <h3><%= article.title %></h3>
-    <p><%= article.text %></p>
+    <h3><%= simple_format(article.title) %></h3>
+    <p><%= simple_format(article.text) %></p>
     <p>
       <%= link_to 'Редактировать', edit_article_path(article) %>
       <%= link_to 'Удалить', article_path(article),
