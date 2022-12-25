@@ -10,17 +10,19 @@
 <p><%= link_to '< назад к публикациям', articles_path %></p>
 
 <h2>Комментарии:</h2>
-<p>
+<div class="col-md-6">
   <%= form_for([@article, @article.comments.build]) do |f| %>
     <p>
-      <%= f.text_area :body, size: '40x3',
-                      placeholder: 'Введите текст комментария' %>
+      <%= f.text_area :body, size: 'x3',
+                      placeholder: 'Введите текст комментария',
+                      class: 'form-control'
+      %>
     </p>
     <p>
-      <%= f.submit 'Добавить комментарий' %>
+      <%= f.submit 'Добавить комментарий', class: 'btn btn-outline-primary' %>
     </p>
   <% end %>
-</p>
+</div>
 
 <% @comments.each do |comment| %>
   <comment>
