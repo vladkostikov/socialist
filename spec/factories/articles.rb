@@ -1,7 +1,13 @@
 FactoryBot.define do
+  factory :user do
+    email { 'email@email.com' }
+    password { 'password' }
+  end
+
   factory :article do
     title { 'Article title' }
     text { 'Article text' }
+    association :user
 
     # Создаём фабрику для создания публикации с несколькими комментариями
     factory :article_with_comments do
