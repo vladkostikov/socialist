@@ -25,10 +25,22 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+
+    # Проверка что пользователь автор публикации
+    if current_user.id != @article.user_id
+      return render plain: 'Эта публикация принадлежит другому пользователю, ' \
+                           'только он может её редактировать.'
+    end
   end
 
   def update
     @article = Article.find(params[:id])
+
+    # Проверка что пользователь автор публикации
+    if current_user.id != @article.user_id
+      return render plain: 'Эта публикация принадлежит другому пользователю, ' \
+                           'только он может её редактировать.'
+    end
 
     if @article.update(article_params)
       redirect_to articles_path
@@ -39,6 +51,13 @@ class ArticlesController < ApplicationController
 
   def destroy
     article = Article.find(params[:id])
+
+    # Проверка что пользователь автор публикации
+    if current_user.id != article.user_id
+      return render plain: 'Эта публикация принадлежит другому пользователю, ' \
+                           'только он может её редактировать.'
+    end
+
     article.destroy
 
     redirect_to articles_path
