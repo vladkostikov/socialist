@@ -5,12 +5,16 @@
 <h1><%= simple_format(@article.title) %></h1>
 <p><%= simple_format(@article.text) %></p>
 <br/>
-<p>
-  <%= link_to 'Редактировать', edit_article_path(@article) %>
-  <%= link_to 'Удалить', article_path(@article),
-              data: {turbo_method: :delete,
-                     turbo_confirm: 'Вы точно хотите удалить публикацию?'} %>
-</p>
+
+<% if current_user == @article.user %>
+  <p>
+    <%= link_to 'Редактировать', edit_article_path(@article) %>
+    <%= link_to 'Удалить', article_path(@article),
+                data: {turbo_method: :delete,
+                       turbo_confirm: 'Вы точно хотите удалить публикацию?'} %>
+  </p>
+<% end %>
+
 <p><%= link_to '< назад к публикациям', articles_path %></p>
 
 <h2>Комментарии:</h2>

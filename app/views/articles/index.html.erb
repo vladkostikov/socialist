@@ -8,12 +8,16 @@
     </div>
     <h3><%= simple_format(article.title) %></h3>
     <p><%= simple_format(article.text) %></p>
-    <p>
-      <%= link_to 'Редактировать', edit_article_path(article) %>
-      <%= link_to 'Удалить', article_path(article),
-                  data: {turbo_method: :delete,
-                         turbo_confirm: 'Вы точно хотите удалить публикацию?'} %>
-    </p>
+
+    <% if current_user == article.user %>
+      <p>
+        <%= link_to 'Редактировать', edit_article_path(article) %>
+        <%= link_to 'Удалить', article_path(article),
+                    data: {turbo_method: :delete,
+                           turbo_confirm: 'Вы точно хотите удалить публикацию?'} %>
+      </p>
+    <% end %>
+
     <% comments_amount = article.comments.count %>
     <p><%= link_to "Комментарии (#{comments_amount})", article_path(article),
                    style: 'text-decoration: none' %></p>
