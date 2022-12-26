@@ -2,6 +2,10 @@
 
 <% @articles.each do |article| %>
   <article>
+    <div>
+      <strong><%= article.user.username %></strong>
+      <%= article.created_at %>
+    </div>
     <h3><%= simple_format(article.title) %></h3>
     <p><%= simple_format(article.text) %></p>
     <p>
