@@ -17,26 +17,67 @@
 
 <p><%= link_to '< назад к публикациям', articles_path %></p>
 
-<h2>Комментарии:</h2>
-<div class="col-md-6">
-  <%= form_for([@article, @article.comments.build]) do |f| %>
-    <p>
-      <%= f.text_area :body, size: 'x3',
-                      placeholder: 'Введите текст комментария',
-                      class: 'form-control'
-      %>
-    </p>
-    <p>
-      <%= f.submit 'Добавить комментарий', class: 'btn btn-outline-primary' %>
-    </p>
-  <% end %>
-</div>
+<!-- Comments section-->
+<section class="mb-5">
+  <div class="card bg-light">
+    <div class="card-body">
+      <!-- Comment form-->
+      <%= render partial: 'comments/form', locals: { instance: @article } %>
 
-<% @comments.each do |comment| %>
-  <comment>
-    <p><strong><%= comment.author %></strong></p>
-    <p><%= simple_format(comment.body) %></p>
-    <p><%= comment.created_at %></p>
-    <hr/>
-  </comment>
-<% end %>
+      <% @comments.each do |comment| %>
+        <% begin
+             comment_author_name = comment.user.username
+           rescue ActiveRecord::RecordNotFound
+             comment_author_name = 'author_deleted'
+           end
+        %>
+
+        <!-- Comment -->
+        <div class="d-flex mb-2" id="<%= dom_id(comment) %>">
+          <!-- Parent comment-->
+          <div class="flex-shrink-0">
+            <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
+          </div>
+
+          <div class="ms-3">
+            <div class="fw-bold"><%= comment_author_name %></div>
+            <div><%= comment.body %></div>
+
+            <% if @replies.key?(comment.id) %>
+              <% @replies[comment.id].each do |reply| %>
+                <% begin
+                     reply_author_name = comment.user.username
+                   rescue ActiveRecord::RecordNotFound
+                     reply_author_name = 'author_deleted'
+                   end
+                %>
+
+                <!-- Child comment -->
+                <div class="d-flex mt-4" id="<%= dom_id(reply) %>">
+                  <div class="flex-shrink-0">
+                    <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
+                  </div>
+
+                  <div class="ms-3">
+                    <div class="fw-bold"><%= reply_author_name %></div>
+                    <div><%= reply.body %></div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+
+            <!-- Reply form -->
+            <div>
+              <a class onclick="reply_form_<%= comment.id %>.style.display='block'"
+                 style="cursor: pointer">Ответить</a>
+
+              <div id="reply_form_<%= comment.id %>" style="display: none">
+                <%= render partial: 'comments/form', locals: { instance: @article, parent_id: comment.id } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+<%= form_with model: instance.comments.new, data: {turbo: false} do |form| %>
+  <form>
+    <div class="mb-2 mt-2">
+      <%= form.text_area :body, rows: "3", cols: '60', class: 'form-control',
+                         placeholder: 'Введите текст комментария' %>
+    </div>
+    <div class="mb-4">
+      <%= form.hidden_field :type, value: instance.class %>
+      <%= form.hidden_field :type_id, value: instance.id %>
+      <%= form.hidden_field :parent_id, value: parent_id ||= 0 %>
+      <%= form.submit 'Добавить комментарий', class: 'btn btn-outline-primary' %>
+    </div>
+  </form>
+<% end %>

@@ -2,17 +2,25 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
   def create
-    @article = Article.find(params[:article_id])
-    comment = @article.comments.new(comment_params)
-    comment.author = current_user.username
-    if comment.save
-      redirect_to article_path(@article)
+    instance = correct_instance(params)
+    @comment = instance.comments.new(comment_params)
+    @comment.user_id = current_user.id
+
+    if @comment.save
+      new_comment = polymorphic_path(instance).concat("#comment_#{@comment.id}")
+      redirect_to new_comment, notice: "Комментарий успешно добавлен"
     end
+  end
+
+  def correct_instance(params)
+    klass = Kernel.const_get(params[:comment][:type].to_sym)
+    id = params[:comment][:type_id]
+    klass.find(id)
   end
 
   private
 
   def comment_params
-    params.require(:comment).permit(:body)
+    params.require(:comment).permit(:body, :parent_id)
   end
 end
