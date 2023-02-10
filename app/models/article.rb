@@ -1,7 +1,7 @@
 class Article < ApplicationRecord
   validates :title, presence: true, length: { maximum: 140 }
   validates :text, presence: true, length: { maximum: 4000 }
-  has_many :comments
+  has_many :comments, as: :commentable
   belongs_to :user
 
   def subject
