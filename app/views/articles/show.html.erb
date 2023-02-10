@@ -46,7 +46,7 @@
             <% if @replies.key?(comment.id) %>
               <% @replies[comment.id].each do |reply| %>
                 <% begin
-                     reply_author_name = comment.user.username
+                     reply_author_name = reply.user.username
                    rescue ActiveRecord::RecordNotFound
                      reply_author_name = 'author_deleted'
                    end
