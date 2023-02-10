@@ -71,7 +71,8 @@ group :test do
   gem "webdrivers"
 end
 
-gem "devise"
+gem "devise", github: "heartcombo/devise", branch: "ca-turbo"
+gem "responders", "~> 3.1"
 gem 'bootstrap', '~> 5.2.3'
 
 group :test, :development do
