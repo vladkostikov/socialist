@@ -81,3 +81,5 @@ group :test, :development do
   gem "shoulda-matchers"
   gem "factory_bot_rails"
 end
+
+gem 'rails-i18n'
