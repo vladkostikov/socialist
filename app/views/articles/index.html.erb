@@ -4,7 +4,7 @@
   <article>
     <div>
       <strong><%= article.user.username %></strong>
-      <%= article.created_at %>
+      <%= article.created_at.strftime("%d.%m.%Y %R") %>
     </div>
     <h3><%= simple_format(article.title) %></h3>
     <p><%= simple_format(article.text) %></p>

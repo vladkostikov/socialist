@@ -1,6 +1,6 @@
 <div>
   <strong><%= @article.user.username %></strong>
-  <%= @article.created_at %>
+  <%= @article.created_at.strftime("%d.%m.%Y %R") %>
 </div>
 <h1><%= simple_format(@article.title) %></h1>
 <p><%= simple_format(@article.text) %></p>
