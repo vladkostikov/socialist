@@ -19,5 +19,10 @@ module Blog
     config.time_zone = "Moscow"
     # config.eager_load_paths << Rails.root.join("extras")
     config.i18n.default_locale = :ru
+
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.default_options = {from: ENV["EMAIL_FROM"]} # example@site.com
+    config.action_mailer.default_url_options = { host: ENV["EMAIL_HOST"] } # site.com
   end
 end
