@@ -27,17 +27,14 @@
           <% end %>
 
           <div class="field mb-3">
-            <%= f.label :password, 'Пароль' %> <i>(оставьте пустым если не хотите изменять)</i><br/>
+            <%= f.label :password, 'Новый пароль' %> <i>(оставьте пустым если не хотите изменять, <%= @minimum_password_length %> символов минимум)</i><br/>
             <%= f.password_field :password,
                                  class: 'form-control mb-2',
                                  autocomplete: 'new-password' %>
-            <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> символов минимум)</em>
-            <% end %>
           </div>
 
           <div class="field mb-3">
-            <%= f.label :password_confirmation, 'Подтвердите пароль' %><br/>
+            <%= f.label :password_confirmation, 'Повторите пароль' %><br/>
             <%= f.password_field :password_confirmation,
                                  class: 'form-control mb-2',
                                  autocomplete: "new-password" %>
