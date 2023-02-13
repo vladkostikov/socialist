@@ -1,0 +1,55 @@
+<h3>Пользователь <%= @user.id %></h3>
+
+<div>
+  <b>Почта: </b><%= @user.email %><br/>
+  <b>Никнейм: </b><%= @user.username %><br/>
+  <b>Дата регистрации: </b><%= I18n.localize(@user.created_at, format: :long) %><br/>
+  <b>Публикаций: </b><%= @user.articles.size %><br/>
+  <b>Комментариев: </b><%= @user.comments.size %><br/>
+</div>
+<hr>
+
+<table class="table">
+  <h3>Публикации</h3>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Дата</th>
+      <th scope="col">Заголовок</th>
+      <th scope="col">Текст</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.articles.each do |article| %>
+      <tr>
+        <th scope="row"><%= link_to article.id, article %></th>
+        <td><%= I18n.localize(article.created_at, format: :long) %></td>
+        <td><%= article.title %></td>
+        <td><%= article.text %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<table class="table">
+  <h3>Комментарии</h3>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Дата</th>
+      <th scope="col">Текст</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.comments.each do |comment| %>
+      <tr>
+        <th scope="row"> <%= comment.id %></th>
+        <td><%= I18n.localize(comment.created_at, format: :long) %></td>
+        <td><%= comment.body %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -10,4 +10,5 @@ Rails.application.routes.draw do
 
   resource :contacts, only: [:new, :create], path_names: { :new => '' }
   resource :terms, only: [:show]
+  resources :users, only: [:show, :index]
 end

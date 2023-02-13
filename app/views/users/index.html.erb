@@ -1,0 +1,25 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Дата регистрации</th>
+      <th scope="col">Никнейм</th>
+      <th scope="col">Электронная почта</th>
+      <th scope="col">Посты</th>
+      <th scope="col">Комментарии</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <th scope="row"><%= link_to user.id, user %></th>
+        <td><%= I18n.localize(user.created_at, format: :long) %></td>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td><%= user.articles.size %></td>
+        <td><%= user.comments.size %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
