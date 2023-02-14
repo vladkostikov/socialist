@@ -29,8 +29,8 @@ class ArticlesController < ApplicationController
 
     # Проверка что пользователь автор публикации
     if current_user.id != @article.user_id
-      return render plain: 'Эта публикация принадлежит другому пользователю, ' \
-                           'только он может её редактировать.'
+      redirect_to @article, alert: 'Эта публикация принадлежит другому пользователю, ' \
+                                 'только он может её редактировать.'
     end
   end
 
@@ -39,7 +39,7 @@ class ArticlesController < ApplicationController
 
     # Проверка что пользователь автор публикации
     if current_user.id != @article.user_id
-      return render plain: 'Эта публикация принадлежит другому пользователю, ' \
+      return redirect_to @article, alert: 'Эта публикация принадлежит другому пользователю, ' \
                            'только он может её редактировать.'
     end
 
@@ -55,8 +55,8 @@ class ArticlesController < ApplicationController
 
     # Проверка что пользователь автор публикации
     if current_user.id != article.user_id
-      return render plain: 'Эта публикация принадлежит другому пользователю, ' \
-                           'только он может её редактировать.'
+      return redirect_to article, alert: 'Эта публикация принадлежит другому пользователю, ' \
+                           'только он может её удалить.'
     end
 
     article.destroy
