@@ -9,8 +9,9 @@
 </div>
 <hr>
 
-
-<%= render partial: 'articles/form', locals: { instance: @user } %>
+<% if current_user %>
+  <%= render partial: 'articles/form', locals: { instance: @user } %>
+<% end %>
 
 <%= render partial: 'articles/content',
            locals: { articles: @articles } %>
