@@ -42,7 +42,7 @@ class ArticlesController < ApplicationController
     end
 
     if @article.update(article_params)
-      redirect_to articles_path
+      redirect_to @article
     else
       render action: 'edit'
     end

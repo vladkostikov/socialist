@@ -2,7 +2,8 @@
   <div class="navbar-vertical-content">
     <ul class="navbar-nav flex-column" id="navbarVerticalNav">
       <li class="nav-item">
-        <%= link_to current_user || new_user_session_path, class: "nav-link link-dark" do %>
+        <%= link_to current_user || new_user_session_path,
+                    class: "nav-link link-dark", data: {turbo: false} do %>
           <div class="d-flex align-items-center">
             <i class="bi bi-person-circle me-1" style="color: #447bba"></i>
             <span class="nav-link-text">Моя страница</span>
@@ -11,7 +12,8 @@
       </li>
 
       <li class="nav-item">
-        <%= link_to articles_path, class: "nav-link link-dark" do %>
+        <%= link_to articles_path,
+                    class: "nav-link link-dark", data: {turbo: false} do %>
             <div class="d-flex align-items-center">
               <i class="bi bi-file-post me-1" style="color: #447bba"></i>
               <span class="nav-link-text">Новости</span>

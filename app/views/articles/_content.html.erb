@@ -8,14 +8,17 @@
             <%= link_to article.user.username, article.user,
                         class: 'card-title text-decoration-none' %>
 
-            <% if article.user != article.wall.wallable %> на стене
-            <%= link_to article.wall.wallable.username, article.wall.wallable,
-                        class: 'card-title text-decoration-none' %>
-            <% end %>
           </h6>
           <small class="text-muted">
             <%= link_to l(article.created_at, format: :post_short), article,
                         class: 'text-muted text-decoration-none' %>
+            <% if article.user != article.wall.wallable %>
+              <span>·</span>
+              <span>на стене
+                <%= link_to article.wall.wallable.username, article.wall.wallable,
+                            class: 'card-title text-decoration-none' %>
+              </span>
+            <% end %>
           </small>
         </div>
 
@@ -26,14 +29,14 @@
             <ul class="dropdown-menu text-small">
               <li>
                 <%= link_to 'Редактировать', edit_article_path(article),
-                            class: 'dropdown-item' %>
+                            class: 'dropdown-item', data: {turbo: false} %>
               </li>
 
               <li><hr class="dropdown-divider"></li>
 
               <li>
                 <%= link_to 'Удалить', article_path(article),
-                            class: 'dropdown-item',
+                            class: 'dropdown-item text-danger',
                             data: {turbo_method: :delete,
                                    turbo_confirm: 'Вы точно хотите удалить публикацию?'} %>
               </li>
@@ -47,7 +50,7 @@
       </div>
 
       <div class="my-0">
-        <%= link_to article, class: 'btn btn-outline-secondary' do %>
+        <%= link_to article_path(article, anchor: 'comments'), class: 'btn btn-outline-secondary' do %>
           <i class="bi bi-chat-left"></i>
           <span class="fw-bold"><%= article.comments.size %></span>
         <% end %>

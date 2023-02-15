@@ -1,0 +1,60 @@
+<% comments.each do |comment| %>
+  <% begin
+       comment_author_name = comment.user.username
+     rescue ActiveRecord::RecordNotFound
+       comment_author_name = 'author_deleted'
+     end
+  %>
+
+  <!-- Comment -->
+  <div class="d-flex mb-2" id="<%= dom_id(comment) %>">
+    <!-- Parent comment-->
+    <div class="flex-shrink-0">
+      <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg">
+    </div>
+
+    <div class="ms-3">
+      <div class="fw-semibold">
+        <%= link_to comment_author_name, comment.user, class: 'text-decoration-none' %>
+      </div>
+      <div><%= comment.body %></div>
+
+      <% if @replies.key?(comment.id) %>
+        <% @replies[comment.id].each do |reply| %>
+          <% begin
+               reply_author_name = reply.user.username
+             rescue ActiveRecord::RecordNotFound
+               reply_author_name = 'author_deleted'
+             end
+          %>
+
+          <!-- Child comment -->
+          <div class="d-flex mt-4" id="<%= dom_id(reply) %>">
+            <div class="flex-shrink-0">
+              <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg">
+            </div>
+
+            <div class="ms-3">
+              <div class="fw-semibold">
+                <%= link_to reply_author_name, reply.user, class: 'text-decoration-none' %>
+              </div>
+              <div><%= reply.body %></div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
+      <!-- Reply form -->
+      <div>
+        <a class="text-decoration-none"
+           onclick="reply_form_<%= comment.id %>.style.display='block'"
+           style="cursor: pointer">Ответить</a>
+
+        <div id="reply_form_<%= comment.id %>" style="display: none">
+          <%= render partial: 'comments/form',
+                     locals: { instance: @article, parent_id: comment.id } %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

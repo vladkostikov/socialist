@@ -1,4 +1,4 @@
-<div class="row mb-4" style="background: white">
+<div class="row mb-4 bg-white mx-auto">
   <div class="container">
     <div class="container px-0 py-1">
       <header class="d-flex flex-wrap align-items-center justify-content-center">
@@ -7,17 +7,40 @@
         </ul>
 
         <ul class="nav me-auto">
-          <li><a href="<%= users_path %>" class="nav-link px-2 ps-0 link-dark">Пользователи</a></li>
+          <li><%= link_to 'Пользователи', users_path,
+                        class: 'nav-link px-2 ps-0 link-dark', data: {turbo: false} %></li>
         </ul>
 
-        <div class="col-md-3 text-end">
+        <div class="col-auto text-end">
           <% if user_signed_in? %>
-            Привет, <%= current_user.username %> |
-            <%= link_to 'Выйти', destroy_user_session_path,
-                        data: { turbo_method: :delete,
-                                turbo_confirm: 'Вы точно хотите выйти?'} %>
+            <div class="dropdown text-end dropdown-menu-end">
+              <a href="<%= users_path %>"
+                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                 data-bs-toggle="dropdown"
+                 aria-expanded="false"
+                 data-target="#navItemGame"
+                 role="button">
+                <img src="https://github.com/vladkostikov.png" alt="vladkostikov" width="32" height="32" class="rounded-circle">
+              </a>
+              <ul class="dropdown-menu text-small" id="navItemGame">
+                <li><%= link_to 'Профиль', current_user,
+                              class: 'dropdown-item', data: {turbo: false} %></li>
+
+                <li><%= link_to 'Настройки', edit_user_registration_path,
+                              class: 'dropdown-item', data: {turbo: false} %></li>
+
+                <li><hr class="dropdown-divider"></li>
+
+                <li><%= link_to 'Выйти', destroy_user_session_path,
+                              class: 'dropdown-item text-danger',
+                              data: { turbo_method: :delete,
+                                      turbo_confirm: 'Вы точно хотите выйти?'} %>
+                </li>
+              </ul>
+            </div>
           <% else %>
-            <a href="<%= new_user_session_path %>" type="button" class="btn btn-outline-primary me-0">Войти</a>
+            <a href="<%= new_user_session_path %>" type="button" class="btn btn-outline-primary me-0">Вход</a>
+            <a href="<%= new_user_registration_path %>" type="button" class="btn btn-outline-success me-0">Регистрация</a>
           <% end %>
         </div>
       </header>
