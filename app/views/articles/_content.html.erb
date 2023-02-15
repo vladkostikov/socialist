@@ -7,6 +7,11 @@
           <h6 class="my-0">
             <%= link_to article.user.username, article.user,
                         class: 'card-title text-decoration-none' %>
+
+            <% if article.user != article.wall.wallable %> на стене
+            <%= link_to article.wall.wallable.username, article.wall.wallable,
+                        class: 'card-title text-decoration-none' %>
+            <% end %>
           </h6>
           <small class="text-muted">
             <%= link_to l(article.created_at, format: :post_short), article,

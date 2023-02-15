@@ -1,0 +1,12 @@
+<%= form_with model: instance.wall.articles.new, data: {turbo: false} do |form| %>
+  <form>
+    <div class="mb-2 mt-2">
+      <%= form.text_area :text, rows: "3", cols: '60', class: 'form-control',
+                         placeholder: 'Введите текст' %>
+    </div>
+    <div class="mb-4">
+      <%= form.hidden_field :wall_id, value: instance.id %>
+      <%= form.submit 'Опубликовать', class: 'btn btn-outline-primary' %>
+    </div>
+  </form>
+<% end %>

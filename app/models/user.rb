@@ -6,6 +6,11 @@ class User < ApplicationRecord
 
   has_many :articles
   has_many :comments
+  has_one :wall, as: :wallable
 
   validates :username, presence: true, uniqueness: true
+
+  after_create do
+    self.create_wall
+  end
 end

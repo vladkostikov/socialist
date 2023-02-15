@@ -1,2 +1,6 @@
+<% if user_signed_in? %>
+  <%= render partial: 'walls/form', locals: { instance: current_user } %>
+<% end %>
+
 <%= render partial: 'articles/content',
            locals: { articles: @articles } %>

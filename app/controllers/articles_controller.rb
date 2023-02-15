@@ -18,9 +18,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     @article.user_id = current_user.id
     if @article.save
-      redirect_to @article
-    else
-      render action: 'new'
+      redirect_back(fallback_location: articles_path)
     end
   end
 
@@ -67,6 +65,6 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :text)
+    params.require(:article).permit(:text, :wall_id)
   end
 end

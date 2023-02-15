@@ -5,5 +5,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @articles = @user.wall.articles.where.not(id: nil).order('id desc')
   end
 end

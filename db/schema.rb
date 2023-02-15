@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_10_141144) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_14_101041) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +20,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_10_141144) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.bigint "wall_id", null: false
     t.index ["user_id"], name: "index_articles_on_user_id"
+    t.index ["wall_id"], name: "index_articles_on_wall_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -56,6 +58,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_10_141144) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  create_table "walls", force: :cascade do |t|
+    t.string "wallable_type"
+    t.bigint "wallable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wallable_type", "wallable_id"], name: "index_walls_on_wallable"
+  end
+
   add_foreign_key "articles", "users"
+  add_foreign_key "articles", "walls"
   add_foreign_key "comments", "users"
 end
