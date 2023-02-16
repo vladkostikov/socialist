@@ -1,42 +1,30 @@
 <% comments.each do |comment| %>
-  <% begin
-       comment_author_name = comment.user.username
-     rescue ActiveRecord::RecordNotFound
-       comment_author_name = 'author_deleted'
-     end
-  %>
-
   <!-- Comment -->
   <div class="d-flex mb-2" id="<%= dom_id(comment) %>">
     <!-- Parent comment-->
     <div class="flex-shrink-0">
-      <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg">
+      <%= image_tag ("photo-profile.jpg"), class: 'rounded-circle', size: '50x50' %>
     </div>
 
     <div class="ms-3">
       <div class="fw-semibold">
-        <%= link_to comment_author_name, comment.user, class: 'text-decoration-none' %>
+        <%= link_to comment.user.full_name, comment.user,
+                    class: 'text-decoration-none', data: { turbo: false } %>
       </div>
       <div><%= comment.body %></div>
 
       <% if @replies.key?(comment.id) %>
         <% @replies[comment.id].each do |reply| %>
-          <% begin
-               reply_author_name = reply.user.username
-             rescue ActiveRecord::RecordNotFound
-               reply_author_name = 'author_deleted'
-             end
-          %>
-
           <!-- Child comment -->
           <div class="d-flex mt-4" id="<%= dom_id(reply) %>">
             <div class="flex-shrink-0">
-              <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg">
+              <%= image_tag ("photo-profile.jpg"), class: 'rounded-circle', size: '50x50' %>
             </div>
 
             <div class="ms-3">
               <div class="fw-semibold">
-                <%= link_to reply_author_name, reply.user, class: 'text-decoration-none' %>
+                <%= link_to reply.user.full_name, reply.user,
+                            class: 'text-decoration-none', data: { turbo: false } %>
               </div>
               <div><%= reply.body %></div>
             </div>

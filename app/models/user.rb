@@ -8,9 +8,16 @@ class User < ApplicationRecord
   has_many :comments
   has_one :wall, as: :wallable
 
-  validates :username, presence: true, uniqueness: true
+  validates :username, uniqueness: true, format: { with: /\A[a-zA-Z]*\z/},
+            length: { maximum: 32 }
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   after_create do
     self.create_wall
+  end
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
   end
 end

@@ -1,13 +1,43 @@
-<h3>Пользователь <%= @user.id %></h3>
+<div class="card mb-3 shadow-sm border" style="border-radius: 13px;">
+  <div class="card-body">
+      <div class="mb-2 mt-2">
+        <div class="row">
+          <div class="col-md-3 mb-2">
+            <%= image_tag ("photo-profile.jpg"), class: 'img-thumbnail' %>
+          </div>
+          <div class="col-auto">
+            <div class="row">
+              <div class="col-auto">
+                <h4><%= @user.full_name %></h4>
+              </div>
+              <div class="col-auto dropdown text-end dropdown-menu-end">
+                <a href="#" class="d-block link-dark" data-bs-toggle="dropdown">
+                  <i class="bi bi-three-dots" style="font-size: 1.4rem"></i>
+                </a>
+                <ul class="dropdown-menu text-small">
+                  <li>
+                    <%= link_to 'Редактировать', edit_user_registration_path,
+                                class: 'dropdown-item', data: { turbo: false } %>
+                  </li>
+                </ul>
+              </div>
+            </div>
 
-<div>
-  <b>Почта: </b><%= @user.email %><br/>
-  <b>Никнейм: </b><%= @user.username %><br/>
-  <b>Дата регистрации: </b><%= I18n.localize(@user.created_at, format: :long) %><br/>
-  <b>Публикаций: </b><%= @user.articles.size %><br/>
-  <b>Комментариев: </b><%= @user.comments.size %><br/>
+            <hr>
+            <div>
+              <b>Почта: </b><%= @user.email %><br/>
+              <% if @user.username.present? %>
+                <b>Никнейм: </b><%= @user.username %><br/>
+              <% end %>
+              <b>Дата регистрации: </b><%= l(@user.created_at, format: :long) %><br/>
+              <b>Публикаций: </b><%= @user.articles.size %><br/>
+              <b>Комментариев: </b><%= @user.comments.size %><br/>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
 </div>
-<hr>
 
 <% if current_user %>
   <%= render partial: 'articles/form', locals: { instance: @user } %>

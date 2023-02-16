@@ -14,15 +14,14 @@
         <div class="col-auto text-end">
           <% if user_signed_in? %>
             <div class="dropdown text-end dropdown-menu-end">
-              <a href="<%= users_path %>"
+              <a href=""
                  class="d-block link-dark text-decoration-none dropdown-toggle"
                  data-bs-toggle="dropdown"
                  aria-expanded="false"
-                 data-target="#navItemGame"
                  role="button">
-                <img src="https://github.com/vladkostikov.png" alt="vladkostikov" width="32" height="32" class="rounded-circle">
+                <%= image_tag ("photo-profile.jpg"), class: 'rounded-circle', size: '32x32' %>
               </a>
-              <ul class="dropdown-menu text-small" id="navItemGame">
+              <ul class="dropdown-menu text-small">
                 <li><%= link_to 'Профиль', current_user,
                               class: 'dropdown-item', data: {turbo: false} %></li>
 

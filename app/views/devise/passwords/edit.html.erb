@@ -21,16 +21,8 @@
                                  required: true %>
           </div>
 
-          <div class="field mb-3">
-            <%= f.label :password_confirmation, 'Повторите пароль' %><br/>
-            <%= f.password_field :password_confirmation,
-                                 class: 'form-control mb-2',
-                                 autocomplete: "new-password",
-                                 required: true %>
-          </div>
-
           <div class="actions">
-            <%= f.submit "Изменить пароль",class: 'w-100 mb-2 btn btn-lg rounded-3 btn-primary' %>
+            <%= f.submit "Изменить",class: 'w-100 mb-2 btn btn-lg rounded-3 btn-primary' %>
           </div>
         <% end %>
       </div>

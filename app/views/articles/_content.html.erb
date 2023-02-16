@@ -5,18 +5,21 @@
         <div class="row">
         <div class="col">
           <h6 class="my-0">
-            <%= link_to article.user.username, article.user,
-                        class: 'card-title text-decoration-none' %>
+            <%= link_to article.user.full_name, article.user,
+                        class: 'card-title text-decoration-none',
+                        data: { turbo: false } %>
 
           </h6>
           <small class="text-muted">
             <%= link_to l(article.created_at, format: :post_short), article,
-                        class: 'text-muted text-decoration-none' %>
+                        class: 'text-muted text-decoration-none',
+                        data: { turbo: false } %>
             <% if article.user != article.wall.wallable %>
               <span>·</span>
               <span>на стене
                 <%= link_to article.wall.wallable.username, article.wall.wallable,
-                            class: 'card-title text-decoration-none' %>
+                            class: 'card-title text-decoration-none',
+                            data: { turbo: false } %>
               </span>
             <% end %>
           </small>
@@ -29,7 +32,7 @@
             <ul class="dropdown-menu text-small">
               <li>
                 <%= link_to 'Редактировать', edit_article_path(article),
-                            class: 'dropdown-item', data: {turbo: false} %>
+                            class: 'dropdown-item', data: { turbo: false } %>
               </li>
 
               <li><hr class="dropdown-divider"></li>
@@ -37,8 +40,8 @@
               <li>
                 <%= link_to 'Удалить', article_path(article),
                             class: 'dropdown-item text-danger',
-                            data: {turbo_method: :delete,
-                                   turbo_confirm: 'Вы точно хотите удалить публикацию?'} %>
+                            data: { turbo_method: :delete,
+                                    turbo_confirm: 'Вы точно хотите удалить публикацию?' } %>
               </li>
             </ul>
           </div>
@@ -50,7 +53,8 @@
       </div>
 
       <div class="my-0">
-        <%= link_to article_path(article, anchor: 'comments'), class: 'btn btn-outline-secondary' do %>
+        <%= link_to article_path(article, anchor: 'comments'),
+                    class: 'btn btn-outline-secondary', data: { turbo: false } do %>
           <i class="bi bi-chat-left"></i>
           <span class="fw-bold"><%= article.comments.size %></span>
         <% end %>

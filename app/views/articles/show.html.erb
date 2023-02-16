@@ -1,10 +1,10 @@
 <!-- Comments section -->
 <section class="mb-4">
   <div class="card bg-white shadow-sm border" style="border-radius: 13px">
-    <div class="card-body">
+    <div class="card-body pb-0">
       <%= render partial: 'articles/content', locals: { articles: [@article] } %>
     </div>
-    <div class="card-body" id="comments">
+    <div class="card-body pt-0" id="comments">
       <!-- Comment form -->
       <%= render partial: 'comments/form', locals: { instance: @article } %>
       <!-- Comments -->
