@@ -18,4 +18,5 @@ Rails.application.routes.draw do
 
   resources :articles, except: [:new]
   resource :wall, only: [:create]
+  resources :likes, only: [:create, :destroy]
 end

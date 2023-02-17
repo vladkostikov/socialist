@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :articles
   has_many :comments
+  has_many :likes
   has_one :wall, as: :wallable
 
   validates :username, uniqueness: true, format: { with: /\A[a-zA-Z]*\z/},
