@@ -7,11 +7,16 @@
     </div>
 
     <div class="ms-3">
-      <div class="fw-semibold">
+      <div class="fw-semibold my-0">
         <%= link_to comment.user.full_name, comment.user,
                     class: 'text-decoration-none', data: { turbo: false } %>
       </div>
+
       <div><%= comment.body %></div>
+
+      <small class="text-muted">
+        <%= l(comment.created_at, format: :post_short) %>
+      </small>
 
       <% if @replies.key?(comment.id) %>
         <% @replies[comment.id].each do |reply| %>
@@ -26,7 +31,12 @@
                 <%= link_to reply.user.full_name, reply.user,
                             class: 'text-decoration-none', data: { turbo: false } %>
               </div>
+
               <div><%= reply.body %></div>
+
+              <small class="text-muted">
+                <%= l(reply.created_at, format: :post_short) %>
+              </small>
             </div>
           </div>
         <% end %>

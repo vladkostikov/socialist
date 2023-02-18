@@ -54,44 +54,11 @@
 
       <div class="row">
         <div class="col-auto pe-0">
-          <% like = current_user.likes.find_by(likeable: article) %>
-          <% likes_count = article.likes.size %>
-
-          <% if like.nil? %>
-            <%= link_to likes_path("like[likeable_type]": article.class,
-                                   "like[likeable_id]": article.id),
-                        data: { "turbo-method": :post },
-                        class: 'btn btn-outline-danger' do %>
-              <i class="bi bi-heart"></i>
-              <span class="fw-bold"><%= likes_count if likes_count.positive?  %></span>
-            <% end %>
-          <% else %>
-            <%= link_to like_path(like.id),
-                        data: { "turbo-method": :delete },
-                        class: 'btn btn-outline-danger' do %>
-              <i class="bi bi-heart-fill"></i>
-              <span class="fw-bold"><%= likes_count %></span>
-            <% end %>
-          <% end %>
+          <%= render partial: 'likes/button', locals: { likeable: article } %>
         </div>
 
         <div class="col-auto">
-          <% comment = current_user.comments.find_by(commentable: article) %>
-          <% comments_count = article.comments.size %>
-
-          <% if comment.nil? %>
-            <%= link_to article_path(article, anchor: 'comments'),
-                        class: 'btn btn-outline-primary', data: { turbo: false } do %>
-              <i class="bi bi-chat-left"></i>
-              <span class="fw-bold"><%= comments_count if comments_count.positive? %></span>
-            <% end %>
-          <% else %>
-            <%= link_to article_path(article, anchor: 'comments'),
-                        class: 'btn btn-outline-primary', data: { turbo: false } do %>
-              <i class="bi bi-chat-left-fill"></i>
-              <span class="fw-bold"><%= comments_count if comments_count.positive? %></span>
-            <% end %>
-          <% end %>
+          <%= render partial: 'comments/button', locals: { commentable: article } %>
         </div>
       </div>
     </div>

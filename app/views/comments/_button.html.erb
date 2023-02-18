@@ -1,0 +1,16 @@
+<% comments_count = commentable.comments.size %>
+<% if current_user %>
+  <% comment_from_current_user = current_user.comments.find_by(commentable: commentable) %>
+<% else %>
+  <% comment_from_current_user = nil %>
+<% end %>
+
+<%= link_to article_path(commentable, anchor: 'comments'),
+            class: 'btn btn-outline-primary', data: { turbo: false } do %>
+  <% if comment_from_current_user.nil? %>
+    <i class="bi bi-chat-left"></i>
+  <% else %>
+    <i class="bi bi-chat-left-fill"></i>
+  <% end %>
+    <span class="fw-bold"><%= comments_count if comments_count.positive? %></span>
+<% end %>

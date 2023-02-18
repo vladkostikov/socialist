@@ -2,12 +2,12 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
   def create
-    instance = correct_instance(params)
-    @comment = instance.comments.new(comment_params)
+    commentable = correct_instance(params)
+    @comment = commentable.comments.new(comment_params)
     @comment.user_id = current_user.id
 
     if @comment.save
-      new_comment = polymorphic_path(instance).concat("#comment_#{@comment.id}")
+      new_comment = polymorphic_path(commentable).concat("#comment_#{@comment.id}")
       redirect_to new_comment, notice: "Комментарий успешно добавлен"
     end
   end
