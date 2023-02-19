@@ -3,7 +3,10 @@
   <div class="d-flex mb-2" id="<%= dom_id(comment) %>">
     <!-- Parent comment-->
     <div class="flex-shrink-0">
-      <%= image_tag ("photo-profile.jpg"), class: 'rounded-circle', size: '50x50' %>
+      <%= link_to comment.user do %>
+        <%= image_tag user_avatar(comment.user, 100),
+                      class: 'rounded-circle border border-secondary', size: '40x40' %>
+      <% end %>
     </div>
 
     <div class="ms-3">
@@ -23,7 +26,10 @@
           <!-- Child comment -->
           <div class="d-flex mt-4" id="<%= dom_id(reply) %>">
             <div class="flex-shrink-0">
-              <%= image_tag ("photo-profile.jpg"), class: 'rounded-circle', size: '50x50' %>
+              <%= link_to reply.user do %>
+                <%= image_tag user_avatar(reply.user, 100),
+                              class: 'rounded-circle border border-secondary', size: '40x40' %>
+              <% end %>
             </div>
 
             <div class="ms-3">

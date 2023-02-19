@@ -6,21 +6,22 @@
           <div class="col-auto pe-0">
             <%= link_to article.user do %>
               <%= image_tag user_avatar(article.user, 200),
-                            class: 'rounded-circle border border-secondary', size: '40x40' %>
+                            class: 'rounded-circle border border-secondary', size: '45x45' %>
             <% end %>
-
           </div>
+
           <div class="col">
             <h6 class="my-0">
               <%= link_to article.user.full_name, article.user,
                           class: 'my_post card-title text-decoration-none',
                           data: { turbo: false } %>
-
             </h6>
+
             <small class="text-muted">
               <%= link_to l(article.created_at, format: :post_short), article,
                           class: 'text-muted text-decoration-none',
                           data: { turbo: false } %>
+
               <% if article.user != article.wall.wallable %>
                 <span>·</span>
                 <span>на стене
@@ -36,6 +37,7 @@
             <a href="#" class="d-block link-dark" data-bs-toggle="dropdown">
               <i class="bi bi-three-dots" style="font-size: 1.4rem"></i>
             </a>
+
             <ul class="dropdown-menu text-small">
               <li>
                 <%= link_to 'Редактировать', edit_article_path(article),
