@@ -27,7 +27,9 @@
             <div>
               <b>Почта: </b><%= @user.email %><br/>
               <% if @user.username.present? %>
-                <b>Никнейм: </b><%= @user.username %><br/>
+                <b>Никнейм: </b>
+                <%= link_to"@#{@user.username}", "#{root_url}@#{@user.username}",
+                           class: 'text-decoration-none' %><br/>
               <% end %>
               <b>Дата регистрации: </b><%= l(@user.created_at, format: :long) %><br/>
               <b>Публикаций: </b><%= @user.articles.size %><br/>

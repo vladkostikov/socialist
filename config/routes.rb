@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get '/' => 'home#index'
   get '/about' => 'pages#about'
+  get '@:username', to: 'users#username'
 
   resource :comments, only: [:create]
 

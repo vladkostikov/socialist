@@ -7,4 +7,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @articles = @user.wall.articles.where.not(id: nil).order('id desc').page(params[:page])
   end
+
+  def username
+    @user = User.find_by(username: params[:username])
+    @articles = @user.wall.articles.where.not(id: nil).order('id desc').page(params[:page])
+    render 'show'
+  end
 end
