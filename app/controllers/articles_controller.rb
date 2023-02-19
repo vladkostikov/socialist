@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @articles = Article.order('id DESC')
+    @articles = Article.order('id DESC').page(params[:page])
   end
 
   def show

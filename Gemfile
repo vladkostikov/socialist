@@ -75,7 +75,7 @@ end
 
 gem "devise", github: "heartcombo/devise", branch: "ca-turbo"
 gem "responders", "~> 3.1"
-gem 'bootstrap', '~> 5.2.3'
+gem "bootstrap", "~> 5.2.3"
 
 group :test, :development do
   gem "capybara"
@@ -84,4 +84,5 @@ group :test, :development do
   gem "factory_bot_rails"
 end
 
-gem 'rails-i18n'
+gem "rails-i18n"
+gem "kaminari"
