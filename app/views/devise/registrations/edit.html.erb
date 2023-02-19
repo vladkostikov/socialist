@@ -2,15 +2,27 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content rounded-4 shadow-sm">
       <div class="p-5 pb-4 border-bottom-0 text-center">
-        <h1 class="fw-bold mb-0 fs-2 text-center">Редактирование</h1>
+        <h1 class="fw-bold mb-0 fs-2 text-center">Настройка профиля</h1>
       </div>
 
       <div class="modal-body p-5 pt-0">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
 
+          <div class="row field-group mb-3">
+            <%= f.label :avatar, 'Аватар' %><br/>
+
+            <div class="col-md-4 field">
+              <%= image_tag user_avatar(resource), class: 'img-thumbnail' %>
+            </div>
+
+            <div class="col-md-8 field">
+              <%= f.file_field(:avatar, accept: 'image/png,image/gif,image/jpeg') %>
+            </div>
+          </div>
+
           <div class="row mb-3">
-            <div class="field col-6">
+            <div class="field col-md-6">
               <%= f.label :first_name, 'Имя' %><br/>
               <%= f.text_field :first_name, class: 'form-control',
                                placeholder: "Иван",
@@ -18,7 +30,7 @@
                                required: true %>
             </div>
 
-            <div class="field col-6">
+            <div class="field col-md-6">
               <%= f.label :last_name, 'Фамилия' %><br/>
               <%= f.text_field :last_name, class: 'form-control',
                                placeholder: "Иванов",
@@ -33,10 +45,12 @@
                               required: true  %>
           </div>
 
-          <%= f.label :username, 'Никнейм' %><br/>
-          <div class="input-group mb-3">
-            <span class="input-group-text">@</span>
-            <%= f.text_field :username, class: 'form-control' %>
+          <div class="field mb-3">
+            <%= f.label :username, 'Никнейм' %><br/>
+            <div class="input-group mb-3">
+              <span class="input-group-text">@</span>
+              <%= f.text_field :username, class: 'form-control' %>
+            </div>
           </div>
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

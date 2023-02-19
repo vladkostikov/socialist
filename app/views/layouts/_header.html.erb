@@ -8,7 +8,8 @@
 
         <ul class="nav me-auto">
           <li><%= link_to 'Пользователи', users_path,
-                        class: 'nav-link px-2 ps-0 link-dark', data: {turbo: false} %></li>
+                        class: 'nav-link px-2 ps-0 link-dark',
+                          data: {turbo: false} %></li>
         </ul>
 
         <div class="col-auto text-end">
@@ -19,7 +20,8 @@
                  data-bs-toggle="dropdown"
                  aria-expanded="false"
                  role="button">
-                <%= image_tag ("photo-profile.jpg"), class: 'rounded-circle', size: '32x32' %>
+                <%= image_tag user_avatar(current_user, 100),
+                              class: 'rounded-circle', size: '32x32' %>
               </a>
               <ul class="dropdown-menu text-small">
                 <li><%= link_to 'Профиль', current_user,
@@ -38,8 +40,10 @@
               </ul>
             </div>
           <% else %>
-            <a href="<%= new_user_session_path %>" type="button" class="btn btn-outline-primary me-0">Вход</a>
-            <a href="<%= new_user_registration_path %>" type="button" class="btn btn-outline-success me-0">Регистрация</a>
+            <a href="<%= new_user_session_path %>" type="button"
+               class="btn btn-outline-primary me-0">Вход</a>
+            <a href="<%= new_user_registration_path %>" type="button"
+               class="btn btn-outline-success me-0">Регистрация</a>
           <% end %>
         </div>
       </header>

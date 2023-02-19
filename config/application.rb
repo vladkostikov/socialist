@@ -24,5 +24,7 @@ module Blog
     config.action_mailer.raise_delivery_errors = true
     config.action_mailer.default_options = {from: ENV["EMAIL_FROM"]} # example@site.com
     config.action_mailer.default_url_options = { host: ENV["EMAIL_HOST"] } # site.com
+
+    config.active_storage.variant_processor = :mini_magick
   end
 end

@@ -3,27 +3,34 @@
     <div class="card-body">
       <div class="my-0">
         <div class="row">
-        <div class="col">
-          <h6 class="my-0">
-            <%= link_to article.user.full_name, article.user,
-                        class: 'card-title text-decoration-none',
-                        data: { turbo: false } %>
-
-          </h6>
-          <small class="text-muted">
-            <%= link_to l(article.created_at, format: :post_short), article,
-                        class: 'text-muted text-decoration-none',
-                        data: { turbo: false } %>
-            <% if article.user != article.wall.wallable %>
-              <span>·</span>
-              <span>на стене
-                <%= link_to article.wall.wallable.full_name, article.wall.wallable,
-                            class: 'card-title text-decoration-none',
-                            data: { turbo: false } %>
-              </span>
+          <div class="col-auto pe-0">
+            <%= link_to article.user do %>
+              <%= image_tag user_avatar(article.user, 200),
+                            class: 'rounded-circle border border-secondary', size: '40x40' %>
             <% end %>
-          </small>
-        </div>
+
+          </div>
+          <div class="col">
+            <h6 class="my-0">
+              <%= link_to article.user.full_name, article.user,
+                          class: 'my_post card-title text-decoration-none',
+                          data: { turbo: false } %>
+
+            </h6>
+            <small class="text-muted">
+              <%= link_to l(article.created_at, format: :post_short), article,
+                          class: 'text-muted text-decoration-none',
+                          data: { turbo: false } %>
+              <% if article.user != article.wall.wallable %>
+                <span>·</span>
+                <span>на стене
+                  <%= link_to article.wall.wallable.full_name, article.wall.wallable,
+                              class: 'card-title text-decoration-none',
+                              data: { turbo: false } %>
+                </span>
+              <% end %>
+            </small>
+          </div>
 
           <div class="col-auto dropdown text-end dropdown-menu-end">
             <a href="#" class="d-block link-dark" data-bs-toggle="dropdown">
