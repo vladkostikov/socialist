@@ -17,7 +17,8 @@
             </div>
 
             <div class="col-md-8 field">
-              <%= f.file_field(:avatar, accept: 'image/png,image/gif,image/jpeg') %>
+              <%= f.file_field :avatar, accept: 'image/png,image/gif,image/jpeg',
+                               class: 'form-control form-control-sm' %>
             </div>
           </div>
 

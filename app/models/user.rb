@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   validates :username, uniqueness: true, format: { with: /\A[a-zA-Z]*\z/},
-            length: { maximum: 32 }
+            length: { maximum: 32 }, allow_blank: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :avatar, content_type: ['image/png', 'image/jpeg'],
