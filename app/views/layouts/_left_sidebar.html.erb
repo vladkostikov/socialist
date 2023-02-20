@@ -1,26 +1,19 @@
-<nav class="navbar navbar-vertical">
-  <div class="navbar-vertical-content">
-    <ul class="navbar-nav flex-column" id="navbarVerticalNav">
-      <li class="nav-item">
-        <%= link_to current_user || new_user_session_path,
-                    class: "nav-link link-dark", data: {turbo: false} do %>
-          <div class="d-flex align-items-center">
-            <i class="bi bi-person-circle me-1" style="color: #447bba"></i>
-            <span class="nav-link-text">Моя страница</span>
-          </div>
-        <% end %>
-      </li>
+<div class="list-group me-1 pt-1">
+  <%= link_to current_user || new_user_session_path,
+              class: "list-group-item-action p-0 text-decoration-none py-1 text-dark rounded",
+              data: {turbo: false} do %>
+    <div class="d-flex align-items-center">
+      <i class="bi bi-person-circle me-1" style="color: #447bba"></i>
+      <span class="nav-link-text">Моя страница</span>
+    </div>
+  <% end %>
 
-      <li class="nav-item">
-        <%= link_to articles_path,
-                    class: "nav-link link-dark", data: {turbo: false} do %>
-            <div class="d-flex align-items-center">
-              <i class="bi bi-file-post me-1" style="color: #447bba"></i>
-              <span class="nav-link-text">Новости</span>
-            </div>
-        <% end %>
-      </li>
-    </ul>
-  </div>
-</nav>
-
+  <%= link_to articles_path,
+              class: "list-group-item-action p-0 text-decoration-none py-1 text-dark rounded",
+              data: {turbo: false} do %>
+    <div class="d-flex align-items-center">
+      <i class="bi bi-file-post me-1" style="color: #447bba"></i>
+      <span class="nav-link-text">Новости</span>
+    </div>
+  <% end %>
+</div>
