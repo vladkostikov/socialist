@@ -73,7 +73,7 @@ group :test do
   gem "webdrivers"
 end
 
-gem "devise", github: "heartcombo/devise", branch: "ca-turbo"
+gem "devise"
 gem "responders", "~> 3.1"
 gem "bootstrap", "~> 5.2.3"
 
@@ -86,3 +86,4 @@ end
 
 gem "rails-i18n"
 gem "kaminari"
+gem "ransack"

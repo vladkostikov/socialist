@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def index
-    @users = User.order('id asc')
+    @q = User.ransack(params[:q])
+    @result = @q.result
+    @users = @result.order('id ASC').page(params[:page])
   end
 
   def show

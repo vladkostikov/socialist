@@ -1,0 +1,31 @@
+<% users.each do |user| %>
+  <div class="card-body">
+    <div class="my-0">
+      <div class="row">
+        <div class="col-auto pe-0">
+          <%= link_to user do %>
+            <%= image_tag user_avatar(user, 200),
+                          class: 'rounded-circle border border-secondary',
+                          size: '80x80' %>
+          <% end %>
+        </div>
+
+        <div class="col">
+          <h6 class="my-0">
+            <%= link_to user.full_name, user,
+                        class: 'card-title text-decoration-none',
+                        data: { turbo: false } %>
+          </h6>
+
+          <span class="text-muted"><%= user.email %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% if users.blank? %>
+  <div class="card-body">
+    <h5>Ничего не найдено</h5>
+  </div>
+<% end %>

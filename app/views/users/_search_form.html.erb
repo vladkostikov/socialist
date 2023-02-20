@@ -1,0 +1,6 @@
+<%= form_with url: users_path, method: :get, data: { turbo: false } do %>
+  <% search_params = :first_name_or_last_name_or_username_or_email_cont  %>
+  <% search_field :q, search_params,
+                  class: 'form-control form-control-sm', placeholder: 'Поиск',
+                  style: "background-color: #edeef0" %>
+<% end %>
