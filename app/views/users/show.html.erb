@@ -28,12 +28,30 @@
               <b>Почта: </b><%= @user.email %><br/>
               <% if @user.username.present? %>
                 <b>Никнейм: </b>
-                <%= link_to"@#{@user.username}", "#{root_url}@#{@user.username}",
+                <%= link_to "@#{@user.username}", "#{root_url}@#{@user.username}",
                            class: 'text-decoration-none', data: { turbo: false } %><br/>
               <% end %>
               <b>Дата регистрации: </b><%= l(@user.created_at, format: :long) %><br/>
-              <b>Публикаций: </b><%= @user.articles.size %><br/>
-              <b>Комментариев: </b><%= @user.comments.size %><br/>
+              <b>Публикации: </b><%= @user.articles.size %><br/>
+              <b>Комментарии: </b><%= @user.comments.size %><br/>
+              <b><%= link_to 'Друзья:', user_friends_path(@user),
+                             class: 'text-decoration-none text-reset',
+                             data: { turbo: false } %></b>
+              <%= render 'users/friend_count', user: @user %><br/>
+
+              <b><%= link_to 'Подписки:', user_subscriptions_path(@user),
+                             class: 'text-decoration-none text-reset',
+                             data: { turbo: false } %></b>
+              <%= render 'users/subscription_count', user: @user %><br/>
+
+              <b><%= link_to 'Подписчики:', user_followers_path(@user),
+                             class: 'text-decoration-none text-reset',
+                             data: { turbo: false } %></b>
+              <%= render 'users/follower_count', user: @user %><br/>
+
+              <% if current_user && @user != current_user %>
+                <%= render 'users/follow_button', user: @user %>
+              <% end %>
             </div>
           </div>
         </div>

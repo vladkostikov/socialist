@@ -10,6 +10,24 @@ class User < ApplicationRecord
   has_one :wall, as: :wallable
   has_one_attached :avatar
 
+  has_many :followed_users,
+           foreign_key: :follower_id,
+           class_name: 'Relationship',
+           dependent: :destroy
+
+  has_many :followees,
+           through: :followed_users,
+           dependent: :destroy
+
+  has_many :following_users,
+           foreign_key: :followee_id,
+           class_name: 'Relationship',
+           dependent: :destroy
+
+  has_many :followers,
+           through: :following_users,
+           dependent: :destroy
+
   validates :username, uniqueness: true, format: { with: /\A[a-zA-Z]*\z/},
             length: { maximum: 32 }, allow_blank: true
   validates :first_name, presence: true

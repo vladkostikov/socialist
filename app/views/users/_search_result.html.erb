@@ -19,6 +19,12 @@
 
           <span class="text-muted"><%= user.email %></span>
         </div>
+
+        <div class="col">
+          <% if current_user && user != current_user %>
+            <%= render 'users/follow_button', user: user %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

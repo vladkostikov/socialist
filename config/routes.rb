@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get '/' => 'home#index'
   get '/about' => 'pages#about'
   get '@:username', to: 'users#username'
+  post 'users/follow', to: 'users#follow'
+  delete 'users/unfollow', to: 'users#unfollow'
 
   resource :comments, only: [:create]
 
@@ -15,6 +17,9 @@ Rails.application.routes.draw do
     resource :wall, only: [:create] do
       resources :articles, only: [:create]
     end
+    get 'friends', to: 'users#friends'
+    get 'subscriptions', to: 'users#subscriptions'
+    get 'followers', to: 'users#followers'
   end
 
   resources :articles, except: [:new]

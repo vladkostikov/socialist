@@ -1,0 +1,4 @@
+<%= turbo_frame_tag "user_#{user.id}_follower_count" do %>
+  <% friends = user.followees & user.followers %>
+  <%= follower_count = user.followers.size - friends.size %>
+<% end %>
