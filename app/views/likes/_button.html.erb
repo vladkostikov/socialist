@@ -1,19 +1,19 @@
 <% likes_count = likeable.likes.size %>
-<% if current_user %>
-  <% like_from_current_user = current_user.likes.find_by(likeable: likeable) %>
-<% else %>
-  <% like_from_current_user = nil %>
-<% end %>
 
-<%= form_with model: Like.new do |form| %>
-  <%= form.hidden_field :likeable_type, value: likeable.class.to_s %>
-  <%= form.hidden_field :likeable_id, value: likeable.id %>
-  <%= form.button nil, class: 'btn btn-outline-danger' do %>
-    <% if like_from_current_user.nil? %>
-      <i class="bi bi-heart"></i>
-    <% else %>
+<%= turbo_frame_tag :likes, likeable do %>
+  <% if liked?(likeable) %>
+    <%= button_to dislike_path, params: { likeable_type: likeable.class.to_s,
+                                          likeable_id: likeable.id },
+                  method: :delete, class: 'btn btn-outline-danger' do %>
       <i class="bi bi-heart-fill"></i>
+      <span class="fw-bold"><%= likes_count if likes_count.positive? %></span>
     <% end %>
-    <span class="fw-bold"><%= likes_count if likes_count.positive?  %></span>
+  <% else %>
+    <%= button_to like_path, params: { likeable_type: likeable.class.to_s,
+                                       likeable_id: likeable.id },
+                  method: :post, class: 'btn btn-outline-danger' do %>
+      <i class="bi bi-heart"></i>
+      <span class="fw-bold"><%= likes_count if likes_count.positive? %></span>
+    <% end %>
   <% end %>
 <% end %>

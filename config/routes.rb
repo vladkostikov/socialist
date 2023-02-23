@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get '@:username', to: 'users#username'
   post 'users/follow', to: 'users#follow'
   delete 'users/unfollow', to: 'users#unfollow'
+  post 'like', to: 'likes#like'
+  delete 'dislike', to: 'likes#dislike'
 
   resource :comments, only: [:create]
 
@@ -24,5 +26,4 @@ Rails.application.routes.draw do
 
   resources :articles, except: [:new]
   resource :wall, only: [:create]
-  resources :likes, only: [:create]
 end
