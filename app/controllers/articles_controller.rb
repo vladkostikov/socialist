@@ -2,6 +2,23 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
+    section = params[:section]
+    if user_signed_in? && section
+      friends = current_user.followee_ids & current_user.follower_ids
+      peoples = case section
+                when 'friends'
+                  friends
+                when 'subscriptions'
+                  current_user.followee_ids - friends
+                when 'followers'
+                  current_user.follower_ids - friends
+                end
+
+      return @articles = Article.where(user_id: peoples)
+                                .order('id DESC')
+                                .page(params[:page])
+    end
+
     @articles = Article.order('id DESC').page(params[:page])
   end
 

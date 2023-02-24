@@ -1,8 +1,17 @@
-<% if user_signed_in? %>
-  <%= render partial: 'articles/form', locals: { instance: current_user } %>
-<% end %>
+<div class="row">
+  <div class="col-md-8">
+    <% if user_signed_in? %>
+      <%= render partial: 'articles/form', locals: { instance: current_user } %>
+    <% end %>
 
-<%= render partial: 'articles/content',
-           locals: { articles: @articles } %>
+    <%= render partial: 'articles/content',
+               locals: { articles: @articles } %>
+  </div>
+
+  <div class="col-md-4">
+    <%= render partial: 'articles/right_sidebar',
+               locals: { user: @user } %>
+  </div>
+</div>
 
 <%= paginate @articles %>
