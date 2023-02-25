@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :articles
   has_many :comments
   has_many :likes
+  has_many :own_bookmarks, class_name: 'Bookmark'
+  has_many :bookmarks, as: :bookmarkable
   has_one :wall, as: :wallable
   has_one_attached :avatar
 

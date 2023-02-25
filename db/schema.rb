@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_22_195852) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_25_151313) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_22_195852) do
     t.integer "likes_count", default: 0, null: false
     t.index ["user_id"], name: "index_articles_on_user_id"
     t.index ["wall_id"], name: "index_articles_on_wall_id"
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "bookmarkable_type", null: false
+    t.bigint "bookmarkable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bookmarkable_type", "bookmarkable_id"], name: "index_bookmarks_on_bookmarkable"
+    t.index ["user_id", "bookmarkable_id", "bookmarkable_type"], name: "bookmarks_index", unique: true
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -120,6 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_22_195852) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "users"
   add_foreign_key "articles", "walls"
+  add_foreign_key "bookmarks", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "users"
 end

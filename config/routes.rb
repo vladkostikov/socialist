@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   delete 'users/unfollow', to: 'users#unfollow'
   post 'like', to: 'likes#like'
   delete 'dislike', to: 'likes#dislike'
+  get 'bookmarks', to: 'bookmarks#index'
+  post 'bookmarks', to: 'bookmarks#create'
+  delete 'bookmarks', to: 'bookmarks#destroy'
 
   resource :comments, only: [:create]
 

@@ -10,17 +10,8 @@
               <div class="col-auto">
                 <h4><%= @user.full_name %></h4>
               </div>
-              <div class="col-auto dropdown text-end dropdown-menu-end">
-                <a href="#" class="d-block link-dark" data-bs-toggle="dropdown">
-                  <i class="bi bi-three-dots" style="font-size: 1.4rem"></i>
-                </a>
-                <ul class="dropdown-menu text-small">
-                  <li>
-                    <%= link_to 'Редактировать', edit_user_registration_path,
-                                class: 'dropdown-item', data: { turbo: false } %>
-                  </li>
-                </ul>
-              </div>
+
+              <%= render partial: 'users/dropdown', locals: { user: @user } %>
             </div>
 
             <hr>

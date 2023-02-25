@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   include UsersHelper
 
+  before_action :authenticate_user!, only: [:friends, :follow, :unfollow]
+
   def index
     @q = User.ransack(params[:q])
     @result = @q.result

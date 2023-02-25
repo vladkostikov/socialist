@@ -1,0 +1,13 @@
+<%= turbo_frame_tag :bookmarks, bookmarkable do %>
+  <% if bookmarked?(bookmarkable) %>
+    <%= button_to 'Удалить из закладок', bookmarks_path,
+                  params: { bookmarkable_type: bookmarkable.class.to_s,
+                            bookmarkable_id: bookmarkable.id },
+                  method: :delete, class: 'dropdown-item' %>
+  <% else %>
+    <%= button_to 'Сохранить в закладки', bookmarks_path,
+                  params: { bookmarkable_type: bookmarkable.class.to_s,
+                            bookmarkable_id: bookmarkable.id },
+                  method: :post, class: 'dropdown-item' %>
+  <% end %>
+<% end %>

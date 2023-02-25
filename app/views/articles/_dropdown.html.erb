@@ -1,0 +1,27 @@
+<div class="col-auto dropdown text-end dropdown-menu-end">
+  <a href="#" class="d-block link-dark" data-bs-toggle="dropdown">
+    <i class="bi bi-three-dots" style="font-size: 1.4rem"></i>
+  </a>
+
+  <ul class="dropdown-menu text-small">
+    <li>
+      <%= render partial: 'bookmarks/button', locals: { bookmarkable: article } %>
+    </li>
+
+    <% if current_user == article.user %>
+      <li>
+        <%= link_to 'Редактировать', edit_article_path(article),
+                    class: 'dropdown-item', data: { turbo: false } %>
+      </li>
+
+      <li><hr class="dropdown-divider"></li>
+  
+      <li>
+        <%= link_to 'Удалить', article_path(article),
+                    class: 'dropdown-item text-danger',
+                    data: { turbo_method: :delete,
+                            turbo_confirm: 'Вы точно хотите удалить публикацию?' } %>
+      </li>
+    <% end %>
+  </ul>
+</div>

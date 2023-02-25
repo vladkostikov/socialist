@@ -1,0 +1,17 @@
+<div class="col-auto dropdown text-end dropdown-menu-end">
+  <a href="#" class="d-block link-dark" data-bs-toggle="dropdown">
+    <i class="bi bi-three-dots" style="font-size: 1.4rem"></i>
+  </a>
+  <ul class="dropdown-menu text-small">
+    <% if current_user == user %>
+      <li>
+        <%= link_to 'Редактировать профиль', edit_user_registration_path,
+                    class: 'dropdown-item', data: { turbo: false } %>
+      </li>
+    <% else %>
+      <li>
+        <%= render partial: 'bookmarks/button', locals: { bookmarkable: user } %>
+      </li>
+    <% end %>
+  </ul>
+</div>
