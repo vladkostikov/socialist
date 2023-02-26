@@ -28,34 +28,29 @@ class ArticlesController < ApplicationController
     @replies = Comment.replies_find(Article, @article.id)
   end
 
-  def new
+  def new; end
+
+  def edit
+    @article = Article.find(params[:id])
+
+    if current_user.id != @article.user_id
+      redirect_to @article, alert: 'Эта публикация принадлежит другому пользователю, ' \
+                                   'только он может её редактировать.'
+    end
   end
 
   def create
     @article = Article.new(article_params)
     @article.user_id = current_user.id
-    if @article.save
-      redirect_back(fallback_location: articles_path)
-    end
-  end
-
-  def edit
-    @article = Article.find(params[:id])
-
-    # Проверка что пользователь автор публикации
-    if current_user.id != @article.user_id
-      redirect_to @article, alert: 'Эта публикация принадлежит другому пользователю, ' \
-                                 'только он может её редактировать.'
-    end
+    redirect_back(fallback_location: articles_path) if @article.save
   end
 
   def update
     @article = Article.find(params[:id])
 
-    # Проверка что пользователь автор публикации
     if current_user.id != @article.user_id
       return redirect_to @article, alert: 'Эта публикация принадлежит другому пользователю, ' \
-                           'только он может её редактировать.'
+                                          'только он может её редактировать.'
     end
 
     if @article.update(article_params)
@@ -68,10 +63,9 @@ class ArticlesController < ApplicationController
   def destroy
     article = Article.find(params[:id])
 
-    # Проверка что пользователь автор публикации
     if current_user.id != article.user_id
       return redirect_to article, alert: 'Эта публикация принадлежит другому пользователю, ' \
-                           'только он может её удалить.'
+                                         'только он может её удалить.'
     end
 
     article.destroy

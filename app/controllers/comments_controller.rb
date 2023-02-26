@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       new_comment = polymorphic_path(commentable).concat("#comment_#{@comment.id}")
-      redirect_to new_comment, notice: "Комментарий успешно добавлен"
+      redirect_to new_comment, notice: 'Комментарий успешно добавлен'
     end
   end
 

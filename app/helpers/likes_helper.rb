@@ -11,7 +11,7 @@ module LikesHelper
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.replace(dom_id( @likeable, :likes),
+          turbo_stream.replace(dom_id(@likeable, :likes),
                                partial: 'likes/button',
                                locals: { likeable: @likeable })
         ]

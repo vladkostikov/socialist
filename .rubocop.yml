@@ -1,0 +1,62 @@
+# This is the configuration used to check the rubocop source code.
+
+require:
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+    - 'spec/fixtures/**/*'
+    - 'tmp/**/*'
+    - '.git/**/*'
+    - 'bin/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'spec/**/*'
+    - 'test/**/*'
+    - 'config/**/*'
+    - 'app/mailers/*'
+
+Layout/ClassStructure:
+  Enabled: true
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Gemspec/DependencyVersion:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Layout/HashAlignment:
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Rails/HelperInstanceVariable:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false

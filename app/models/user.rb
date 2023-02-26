@@ -30,26 +30,26 @@ class User < ApplicationRecord
            through: :following_users,
            dependent: :destroy
 
-  validates :username, uniqueness: true, format: { with: /\A[a-zA-Z]*\z/},
-            length: { maximum: 32 }, allow_blank: true
+  validates :username, uniqueness: true, format: { with: /\A[a-zA-Z]*\z/ },
+                       length: { maximum: 32 }, allow_blank: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :avatar, content_type: ['image/png', 'image/jpeg'],
-            size: {less_than: 1.megabyte}
+                     size: { less_than: 1.megabyte }
 
   after_create do
-    self.create_wall
+    create_wall
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    ['email', 'first_name', 'last_name', 'username']
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    ['avatar_attachment', 'avatar_blob']
   end
 
   def full_name
-    "#{self.first_name} #{self.last_name}"
-  end
-
-  def self.ransackable_attributes(auth_object = nil)
-    ["email", "first_name", "last_name", "username"]
-  end
-
-  def self.ransackable_associations(auth_object = nil)
-    ["avatar_attachment", "avatar_blob"]
+    "#{first_name} #{last_name}"
   end
 end

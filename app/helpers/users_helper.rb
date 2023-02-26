@@ -20,7 +20,7 @@ module UsersHelper
                               locals: { user: @user }),
           turbo_stream.update("user_#{@user.id}_follower_count",
                               partial: 'users/follower_count',
-                              locals: { user: @user }),
+                              locals: { user: @user })
         ]
       end
     end

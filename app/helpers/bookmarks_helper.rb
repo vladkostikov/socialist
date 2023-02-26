@@ -11,7 +11,7 @@ module BookmarksHelper
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.replace(dom_id( @bookmarkable, :bookmarks),
+          turbo_stream.replace(dom_id(@bookmarkable, :bookmarks),
                                partial: 'bookmarks/button',
                                locals: { bookmarkable: @bookmarkable })
         ]
