@@ -1,0 +1,8 @@
+<div class="col">
+  <% time = l(comment.created_at, format: :post_short) %>
+  <% comment_link = polymorphic_path(comment.commentable)
+                      .concat("#comment_#{comment.id}") %>
+  <%= link_to time, comment_link,
+              class: 'text-decoration-none text-muted',
+              data: { turbo: false } %>
+</div>

@@ -5,11 +5,14 @@
     <div class="flex-shrink-0">
       <%= link_to comment.user do %>
         <%= image_tag user_avatar(comment.user, 100),
-                      class: 'rounded-circle border border-secondary', size: '40x40' %>
+                      class: 'rounded-circle border border-secondary',
+                      size: '40x40' %>
       <% end %>
+      <%= render partial: 'comments/dropdown',
+                 locals: { comment: comment } %>
     </div>
 
-    <div class="ms-3">
+    <div class="row ms-3">
       <div class="fw-semibold my-0">
         <%= link_to comment.user.full_name, comment.user,
                     class: 'text-decoration-none', data: { turbo: false } %>
@@ -17,9 +20,7 @@
 
       <div><%= comment.body %></div>
 
-      <small class="text-muted">
-        <%= l(comment.created_at, format: :post_short) %>
-      </small>
+      <%= render partial: 'comments/time_link', locals: { comment: comment } %>
 
       <% if @replies.key?(comment.id) %>
         <% @replies[comment.id].each do |reply| %>
@@ -28,7 +29,10 @@
             <div class="flex-shrink-0">
               <%= link_to reply.user do %>
                 <%= image_tag user_avatar(reply.user, 100),
-                              class: 'rounded-circle border border-secondary', size: '40x40' %>
+                              class: 'rounded-circle border border-secondary',
+                              size: '40x40' %>
+                <%= render partial: 'comments/dropdown',
+                           locals: { comment: reply } %>
               <% end %>
             </div>
 
@@ -40,9 +44,7 @@
 
               <div><%= reply.body %></div>
 
-              <small class="text-muted">
-                <%= l(reply.created_at, format: :post_short) %>
-              </small>
+              <%= render partial: 'comments/time_link', locals: { comment: reply } %>
             </div>
           </div>
         <% end %>

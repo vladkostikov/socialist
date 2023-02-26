@@ -1,0 +1,17 @@
+<div class="col dropdown dropdown-menu-end text-center">
+  <a href="#" class="d-block link-dark" data-bs-toggle="dropdown">
+    <i class="bi bi-three-dots" style="font-size: 1.4rem"></i>
+  </a>
+  <ul class="dropdown-menu text-small">
+    <% if user_signed_in? && current_user.id == comment.user_id %>
+      <li>
+        <%= link_to 'Редактировать', edit_comment_path(comment),
+                    class: 'dropdown-item', data: { turbo: false } %>
+      </li>
+    <% end %>
+
+      <li>
+        <%= render partial: 'bookmarks/button', locals: { bookmarkable: comment } %>
+      </li>
+  </ul>
+</div>

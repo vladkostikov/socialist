@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   post 'bookmarks', to: 'bookmarks#create'
   delete 'bookmarks', to: 'bookmarks#destroy'
 
-  resource :comments, only: [:create]
+  resources :comments, only: [:create, :edit, :update]
 
   resource :contacts, only: [:new, :create], path_names: { :new => '' }
   resource :terms, only: [:show]

@@ -5,17 +5,26 @@ class BookmarksController < ApplicationController
 
   def index
     type = params[:type]
-    if type == 'user'
-      return @users = current_user.own_bookmarks
-                                  .where(bookmarkable_type: 'User')
-                                  .order('created_at DESC')
-                                  .page(params[:page])
+    case type
+    when 'user'
+      @users =
+        current_user.own_bookmarks
+                    .where(bookmarkable_type: 'User')
+                    .order('created_at DESC')
+                    .page(params[:page])
+    when 'comment'
+      @comments =
+        current_user.own_bookmarks
+                    .where(bookmarkable_type: 'Comment')
+                    .order('created_at DESC')
+                    .page(params[:page])
+    else
+      @articles =
+        current_user.own_bookmarks
+                    .where(bookmarkable_type: 'Article')
+                    .order('created_at DESC')
+                    .page(params[:page])
     end
-
-    @articles = current_user.own_bookmarks
-                            .where(bookmarkable_type: 'Article')
-                            .order('created_at DESC')
-                            .page(params[:page])
   end
 
   def create

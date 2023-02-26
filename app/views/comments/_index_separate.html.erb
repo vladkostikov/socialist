@@ -1,0 +1,36 @@
+<% comments.each do |comment| %>
+  <div class="card mb-3 shadow-sm border" style="border-radius: 13px;">
+    <div class="card-body">
+      <div class="my-0">
+        <div class="row">
+          <div class="col-auto pe-0">
+            <div class="d-flex mb-2" id="<%= dom_id(comment) %>">
+              <!-- Parent comment-->
+              <div class="flex-shrink-0">
+                <%= link_to comment.user do %>
+                  <%= image_tag user_avatar(comment.user, 100),
+                                class: 'rounded-circle border border-secondary',
+                                size: '40x40' %>
+                <% end %>
+
+                <%= render partial: 'comments/dropdown',
+                           locals: { comment: comment } %>
+              </div>
+
+              <div class="row ms-3">
+                <div class="fw-semibold my-0">
+                  <%= link_to comment.user.full_name, comment.user,
+                              class: 'text-decoration-none', data: { turbo: false } %>
+                </div>
+
+                <div><%= comment.body %></div>
+
+                <%= render partial: 'comments/time_link', locals: { comment: comment } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
