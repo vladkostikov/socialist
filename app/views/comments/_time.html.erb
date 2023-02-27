@@ -1,4 +1,4 @@
-<div class="col">
+<div class="col-auto">
   <% time = l(comment.created_at, format: :post_short) %>
   <% comment_link = polymorphic_path(comment.commentable)
                       .concat("#comment_#{comment.id}") %>

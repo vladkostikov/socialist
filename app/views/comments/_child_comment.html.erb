@@ -1,0 +1,25 @@
+<div class="d-flex mt-4" id="<%= dom_id(comment) %>">
+  <div class="flex-shrink-0">
+    <%= link_to comment.user do %>
+      <%= image_tag user_avatar(comment.user, 100),
+                    class: 'rounded-circle border border-secondary',
+                    size: '40x40' %>
+      <%= render partial: 'comments/dropdown',
+                 locals: { comment: comment } %>
+    <% end %>
+  </div>
+
+  <div class="ms-3">
+    <div class="fw-semibold">
+      <%= link_to comment.user.full_name, comment.user,
+                  class: 'text-decoration-none', data: { turbo: false } %>
+    </div>
+
+    <div><%= comment.body %></div>
+
+    <div class="row">
+      <%= render partial: 'comments/time', locals: { comment: comment } %>
+      <%= render partial: 'likes/button', locals: { likeable: comment } %>
+    </div>
+  </div>
+</div>

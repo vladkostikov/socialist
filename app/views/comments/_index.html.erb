@@ -1,7 +1,5 @@
 <% comments.each do |comment| %>
-  <!-- Comment -->
   <div class="d-flex mb-2" id="<%= dom_id(comment) %>">
-    <!-- Parent comment-->
     <div class="flex-shrink-0">
       <%= link_to comment.user do %>
         <%= image_tag user_avatar(comment.user, 100),
@@ -20,33 +18,14 @@
 
       <div><%= comment.body %></div>
 
-      <%= render partial: 'comments/time_link', locals: { comment: comment } %>
+      <div class="row">
+        <%= render partial: 'comments/time', locals: { comment: comment } %>
+        <%= render partial: 'likes/button', locals: { likeable: comment } %>
+      </div>
 
       <% if @replies.key?(comment.id) %>
         <% @replies[comment.id].each do |reply| %>
-          <!-- Child comment -->
-          <div class="d-flex mt-4" id="<%= dom_id(reply) %>">
-            <div class="flex-shrink-0">
-              <%= link_to reply.user do %>
-                <%= image_tag user_avatar(reply.user, 100),
-                              class: 'rounded-circle border border-secondary',
-                              size: '40x40' %>
-                <%= render partial: 'comments/dropdown',
-                           locals: { comment: reply } %>
-              <% end %>
-            </div>
-
-            <div class="ms-3">
-              <div class="fw-semibold">
-                <%= link_to reply.user.full_name, reply.user,
-                            class: 'text-decoration-none', data: { turbo: false } %>
-              </div>
-
-              <div><%= reply.body %></div>
-
-              <%= render partial: 'comments/time_link', locals: { comment: reply } %>
-            </div>
-          </div>
+          <%= render partial: 'comments/child_comment', locals: { comment: reply } %>
         <% end %>
       <% end %>
 

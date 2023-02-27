@@ -40,7 +40,7 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body, :parent_id)
-    end
+  end
 
   def comment_update_params
     params.require(:comment).permit(:body)
