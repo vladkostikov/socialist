@@ -1,14 +1,14 @@
-<%= form_with model: instance.wall.articles.new, data: { turbo: false } do |form| %>
+<%= form_with model: wallable.wall.articles.new, data: { turbo: false } do |form| %>
   <div class="card mb-3 shadow-sm border" style="border-radius: 13px;">
     <div class="card-body">
       <form>
         <div class="mb-2 mt-2">
-          <% placeholder = 'Что у вас нового?' if instance.wall == current_user.wall %>
+          <% placeholder = 'Что у вас нового?' if wallable.wall == current_user.wall %>
           <%= form.text_area :text, rows: "2", class: 'form-control',
                              placeholder: placeholder || 'Напишите что-нибудь...' %>
         </div>
         <div class="mb-1">
-          <%= form.hidden_field :wall_id, value: instance.id %>
+          <%= form.hidden_field :wall_id, value: wallable.id %>
           <%= form.submit 'Опубликовать', class: 'btn btn-outline-primary' %>
         </div>
       </form>

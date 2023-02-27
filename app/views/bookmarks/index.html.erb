@@ -14,12 +14,15 @@
 
     <% elsif @users %>
       <div class="card mb-3 shadow-sm border" style="border-radius: 13px;">
-        <div class="card-body pb-0">
+        <div class="card-body pb-2">
           <h5>
             <span>Закладки</span>
             <span class="text-muted ms-1">Люди</span>
           </h5>
         </div>
+      </div>
+
+      <div class="card mb-3 shadow-sm border" style="border-radius: 13px;">
         <%= render partial: 'users/search_result',
                    locals: { users: @users.map(&:bookmarkable) } %>
       </div>

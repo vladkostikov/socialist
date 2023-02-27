@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "home#index"
+  root to: "articles#index"
 
-  get '/' => 'home#index'
-  get '/about' => 'pages#about'
   get '@:username', to: 'users#username'
   post 'users/follow', to: 'users#follow'
   delete 'users/unfollow', to: 'users#unfollow'
@@ -14,9 +12,7 @@ Rails.application.routes.draw do
   delete 'bookmarks', to: 'bookmarks#destroy'
 
   resources :comments, only: [:create, :edit, :update]
-
   resource :contacts, only: [:new, :create], path_names: { :new => '' }
-  resource :terms, only: [:show]
 
   resources :users, only: [:show, :index] do
     resource :wall, only: [:create] do
