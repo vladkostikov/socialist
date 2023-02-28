@@ -43,6 +43,6 @@ class BookmarksController < ApplicationController
   private
 
   def bookmark_params
-    params.permit(:bookmarkable_id, :bookmarkable_type)
+    params.require(:bookmark).permit(:bookmarkable_id, :bookmarkable_type)
   end
 end
