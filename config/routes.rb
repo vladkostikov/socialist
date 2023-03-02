@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'bookmarks', to: 'bookmarks#index'
   post 'bookmarks', to: 'bookmarks#create'
   delete 'bookmarks', to: 'bookmarks#destroy'
+  get 'feed', to: 'articles#index'
 
   resources :comments, only: [:create, :edit, :update]
   resource :contacts, only: [:new, :create], path_names: { :new => '' }

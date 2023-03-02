@@ -1,0 +1,65 @@
+<div class="card mb-3 shadow-sm border" style="border-radius: 13px;">
+  <div class="card-body">
+    <div class="list-group">
+      <%= link_to feed_path,
+                  class: "list-group-item-action p-0 text-decoration-none py-1 text-dark rounded",
+                  data: {turbo: false} do %>
+        <div class="d-flex align-items-center">
+          <span class="nav-link-text">Новости</span>
+        </div>
+      <% end %>
+
+      <div class="list-group ps-3">
+        <%= link_to feed_path(section: 'friends'),
+                    class: "list-group-item-action p-0 text-decoration-none py-1 text-dark rounded",
+                    data: {turbo: false} do %>
+          <div class="d-flex align-items-center">
+            <span class="nav-link-text">Друзья</span>
+          </div>
+        <% end %>
+
+        <%= link_to feed_path(section: 'subscriptions'),
+                    class: "list-group-item-action p-0 text-decoration-none py-1 text-dark rounded",
+                    data: {turbo: false} do %>
+          <div class="d-flex align-items-center">
+            <span class="nav-link-text">Подписки</span>
+          </div>
+        <% end %>
+
+        <%= link_to feed_path(section: 'followers'),
+                    class: "list-group-item-action p-0 text-decoration-none py-1 text-dark rounded",
+                    data: {turbo: false} do %>
+          <div class="d-flex align-items-center">
+            <span class="nav-link-text">Подписчики</span>
+          </div>
+        <% end %>
+      </div>
+
+      <%= link_to feed_path(likes: ''),
+                  class: "list-group-item-action p-0 text-decoration-none py-1 text-dark rounded",
+                  data: {turbo: false} do %>
+        <div class="d-flex align-items-center">
+          <span class="nav-link-text">Реакции</span>
+        </div>
+      <% end %>
+
+      <div class="list-group ps-3">
+        <%= link_to feed_path(likes: 'articles'),
+                    class: "list-group-item-action p-0 text-decoration-none py-1 text-dark rounded",
+                    data: {turbo: false} do %>
+          <div class="d-flex align-items-center">
+            <span class="nav-link-text">Публикации</span>
+          </div>
+        <% end %>
+
+        <%= link_to feed_path(likes: 'comments'),
+                    class: "list-group-item-action p-0 text-decoration-none py-1 text-dark rounded",
+                    data: {turbo: false} do %>
+          <div class="d-flex align-items-center">
+            <span class="nav-link-text">Комментарии</span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

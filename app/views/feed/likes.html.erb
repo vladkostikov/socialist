@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-8">
+    <%= render partial: 'articles/form', locals: { wallable: current_user } %>
+
+    <% if @likes_articles %>
+      <%= render partial: 'articles/content',
+                 locals: { articles: @likes_articles.map(&:likeable) } %>
+    <% elsif @likes_comments %>
+      <%= render partial: 'comments/index_separate',
+                 locals: { comments: @likes_comments.map(&:likeable) }%>
+    <% end %>
+  </div>
+
+  <div class="col-md-4">
+    <%= render partial: 'feed/right_sidebar' %>
+  </div>
+</div>
+
+<% if @likes_articles %>
+  <%= paginate @likes_articles %>
+<% elsif @likes_comments %>
+  <%= paginate @likes_comments %>
+<% end %>

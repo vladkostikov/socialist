@@ -25,7 +25,10 @@
 
                 <div><%= comment.body %></div>
 
-                <%= render partial: 'comments/time', locals: { comment: comment } %>
+                <div class="row">
+                  <%= render partial: 'comments/time', locals: { comment: comment } %>
+                  <%= render partial: 'likes/button', locals: { likeable: comment } %>
+                </div>
               </div>
             </div>
           </div>

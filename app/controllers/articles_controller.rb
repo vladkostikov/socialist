@@ -3,23 +3,19 @@ class ArticlesController < ApplicationController
 
   def index
     section = params[:section]
-    if user_signed_in? && section
-      friends = current_user.followee_ids & current_user.follower_ids
-      peoples = case section
-                when 'friends'
-                  friends
-                when 'subscriptions'
-                  current_user.followee_ids - friends
-                when 'followers'
-                  current_user.follower_ids - friends
-                end
+    likes_type = params[:likes]
 
-      return @articles = Article.where(user_id: peoples)
-                                .order('id DESC')
-                                .page(params[:page])
+    if user_signed_in? && section
+      @articles = find_articles(section)
+      return render 'feed/articles'
+    elsif user_signed_in? && likes_type
+      @likes_comments = find_likes(likes_type) if likes_type == 'comments'
+      @likes_articles = find_likes(likes_type) unless @likes_comments
+      return render 'feed/likes'
     end
 
     @articles = Article.order('id DESC').page(params[:page])
+    render 'feed/articles'
   end
 
   def show
@@ -77,5 +73,37 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:text, :wall_id)
+  end
+
+  def find_peoples_ids(section)
+    friends = current_user.followee_ids & current_user.follower_ids
+    case section
+    when 'subscriptions'
+      current_user.followee_ids - friends
+    when 'followers'
+      current_user.follower_ids - friends
+    else
+      friends
+    end
+  end
+
+  def find_articles(section)
+    peoples = find_peoples_ids(section)
+    Article.where(user_id: peoples)
+           .order('id DESC')
+           .page(params[:page])
+  end
+
+  def find_likes(likes_type)
+    case likes_type
+    when 'comments'
+      current_user.likes.where(likeable_type: 'Comment')
+                  .order('created_at DESC')
+                  .page(params[:page])
+    else
+      current_user.likes.where(likeable_type: 'Article')
+                  .order('created_at DESC')
+                  .page(params[:page])
+    end
   end
 end
