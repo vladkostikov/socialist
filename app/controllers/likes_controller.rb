@@ -11,9 +11,13 @@ class LikesController < ApplicationController
 
   def dislike
     like = current_user.likes.find_by(like_params)
-    @likeable = like.likeable
-    like.destroy
-    update_button
+    if like
+      @likeable = like.likeable
+      like.destroy
+      return update_button
+    end
+
+    method(:like).call
   end
 
   private
