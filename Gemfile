@@ -77,9 +77,9 @@ group :test do
   gem 'webdrivers'
 end
 
+gem 'aws-sdk-s3', require: false
 gem 'bootstrap'
 gem 'devise'
-gem 'google-cloud-storage'
 gem 'kaminari'
 gem 'rails-i18n'
 gem 'ransack'

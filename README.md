@@ -33,9 +33,9 @@
 ### Библиотеки
 * actionmailer
 * activestorage
+* aws-sdk-s3
 * bootstrap
 * devise
-* google-cloud-storage
 * image_processing
 * kaminari
 * ransack
