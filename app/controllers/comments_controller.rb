@@ -5,8 +5,8 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
 
     if current_user.id != @comment.user_id
-      redirect_to @comment, alert: 'Эта публикация принадлежит другому пользователю, ' \
-                                   'только он может её редактировать.'
+      redirect_to @comment, alert: 'Этот комментарий принадлежит другому пользователю, ' \
+                                   'только он может его редактировать.'
     end
   end
 
@@ -25,8 +25,8 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
 
     if current_user.id != @comment.user_id
-      return redirect_to @comment, alert: 'Эта публикация принадлежит другому пользователю, ' \
-                                          'только он может её редактировать.'
+      return redirect_to @comment, alert: 'Этот комментарий принадлежит другому пользователю, ' \
+                                          'только он может его редактировать.'
     end
 
     if @comment.update(comment_update_params)

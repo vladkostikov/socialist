@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
+    @article = Article.with_all_rich_text.find(params[:id])
     @comments = Comment.comments_find(Article, @article.id)
     @replies = Comment.replies_find(Article, @article.id)
   end
@@ -72,7 +72,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:text, :wall_id)
+    params.require(:article).permit(:wall_id, :content)
   end
 
   def find_peoples_ids(section)

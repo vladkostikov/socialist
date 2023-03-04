@@ -4,9 +4,10 @@
       <form>
         <div class="mb-2 mt-2">
           <% placeholder = 'Что у вас нового?' if wallable.wall == current_user.wall %>
-          <%= form.text_area :text, rows: "2", class: 'form-control',
-                             placeholder: placeholder || 'Напишите что-нибудь...' %>
+          <%= form.rich_text_area :content, class: 'form-control',
+                                  placeholder: placeholder || 'Напишите что-нибудь...' %>
         </div>
+
         <div class="mb-1">
           <%= form.hidden_field :wall_id, value: wallable.id %>
           <%= form.submit 'Опубликовать', class: 'btn btn-outline-primary' %>

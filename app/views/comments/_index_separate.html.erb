@@ -23,7 +23,7 @@
                               class: 'text-decoration-none', data: { turbo: false } %>
                 </div>
 
-                <div><%= comment.body %></div>
+                <%= simple_format(comment.body, {}, wrapper_tag: "div") %>
 
                 <div class="row">
                   <%= render partial: 'comments/time', locals: { comment: comment } %>

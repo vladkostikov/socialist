@@ -61,10 +61,11 @@
 (следующие команды во второй вкладке)
 - `bin/rails db:create`
 - `bin/rails db:migrate`
+- `bin/rails assets:precompile`
 - `bin/rails server`
 
 Если всё получилось, то сайт будет доступен по адресу http://localhost:3000
 
 Если на команде `bundle install` будет ошибка с `pg`, то нужно будет установить
 `libpq` и `postgresql`, например с помощью `apg-get install` или `brew install`.
-И выполнить команду `gem install pg 1.4.5`.
+И выполнить команду `gem install pg 1.4.6`.
