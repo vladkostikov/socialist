@@ -10,19 +10,22 @@ class LikesController < ApplicationController
   end
 
   def dislike
-    like = current_user.likes.find_by(like_params)
-    if like
-      @likeable = like.likeable
+    if (like = current_user.likes.find_by(like_params))
       like.destroy
-      return update_button
     end
-
-    method(:like).call
+    @likeable = likeable(like_params)
+    update_button
   end
 
   private
 
   def like_params
     params.require(:like).permit(:likeable_id, :likeable_type)
+  end
+
+  def likeable(params)
+    klass = Kernel.const_get(params[:likeable_type].to_sym)
+    id = params[:likeable_id]
+    klass.find(id)
   end
 end

@@ -1,22 +1,30 @@
 <% likes_count = likeable.likes.size %>
+<% likes_count = nil unless likes_count.positive? %>
 <% classes = 'btn btn-link link-danger p-0' if likeable.class.to_s == 'Comment' %>
-<% classes = classes || 'btn btn-outline-danger' %>
+<% classes ||= 'btn btn-outline-danger' %>
 
 <div class="col-auto p-0">
-  <%= turbo_frame_tag :likes, likeable do %>
-    <% if liked?(likeable) %>
-      <%= button_to dislike_path, params: { like: {
-        likeable_type: likeable.class.to_s,
-        likeable_id: likeable.id } }, method: :delete, class: classes do %>
-        <i class="bi bi-heart-fill"></i>
-        <span class="fw-bold"><%= likes_count if likes_count.positive? %></span>
-      <% end %>
-    <% else %>
-      <%= button_to like_path, params: { like: {
-        likeable_type: likeable.class.to_s,
-        likeable_id: likeable.id } }, method: :post, class: classes do %>
-        <i class="bi bi-heart"></i>
-        <span class="fw-bold"><%= likes_count if likes_count.positive? %></span>
+  <% if !user_signed_in? %>
+    <%= link_to new_user_session_path, class: classes do %>
+      <i class="bi bi-heart"></i>
+      <span class="fw-bold"><%= likes_count %></span>
+    <% end %>
+  <% else %>
+    <%= turbo_frame_tag :likes, likeable do %>
+      <% if liked?(likeable) %>
+        <%= button_to dislike_path, params: { like: {
+          likeable_type: likeable.class.to_s,
+          likeable_id: likeable.id } }, method: :delete, class: classes do %>
+          <i class="bi bi-heart-fill"></i>
+          <span class="fw-bold"><%= likes_count %></span>
+        <% end %>
+      <% else %>
+        <%= button_to like_path, params: { like: {
+          likeable_type: likeable.class.to_s,
+          likeable_id: likeable.id } }, method: :post, class: classes do %>
+          <i class="bi bi-heart"></i>
+          <span class="fw-bold"><%= likes_count %></span>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
