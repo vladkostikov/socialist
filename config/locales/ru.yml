@@ -267,4 +267,5 @@ ru:
       long: "%d %B %Y, %H:%M"
       short: "%d %b, %H:%M"
       post_short: "%d %b в %H:%M"
+      date: "%d %b %Y"
     pm: вечера

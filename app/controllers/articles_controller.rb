@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
       return render 'feed/likes'
     end
 
-    @articles = Article.order('id DESC').page(params[:page])
+    @articles = Article.order('created_at DESC').page(params[:page])
     render 'feed/articles'
   end
 
@@ -90,7 +90,7 @@ class ArticlesController < ApplicationController
   def find_articles(section)
     peoples = find_peoples_ids(section)
     Article.where(user_id: peoples)
-           .order('id DESC')
+           .order('created_at DESC')
            .page(params[:page])
   end
 

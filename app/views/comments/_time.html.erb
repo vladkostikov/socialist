@@ -1,5 +1,6 @@
 <div class="col-auto">
-  <% time = l(comment.created_at, format: :post_short) %>
+  <% comment.created_at.year == Date.today.year ? format = :post_short : format = :date %>
+  <% time = l(comment.created_at, format: format) %>
   <% comment_link = polymorphic_path(comment.commentable)
                       .concat("#comment_#{comment.id}") %>
   <%= link_to time, comment_link,

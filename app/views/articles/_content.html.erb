@@ -18,7 +18,8 @@
             </h6>
 
             <small class="text-muted">
-              <%= link_to l(article.created_at, format: :post_short), article,
+              <% article.created_at.year == Date.today.year ? format = :post_short : format = :date %>
+              <%= link_to l(article.created_at, format: format), article,
                           class: 'text-muted text-decoration-none',
                           data: { turbo: false } %>
 
