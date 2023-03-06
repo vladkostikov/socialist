@@ -1,5 +1,9 @@
 <%= turbo_frame_tag :bookmarks, bookmarkable do %>
-  <% if bookmarked?(bookmarkable) %>
+  <% if !user_signed_in? %>
+    <%= link_to 'Сохранить в закладки', new_user_session_path,
+                class: 'dropdown-item',
+                data: { turbo: false } %>
+  <% elsif bookmarked?(bookmarkable) %>
     <%= button_to 'Удалить из закладок', bookmarks_path,
                   params: { bookmark: { bookmarkable_type: bookmarkable.class.to_s,
                                         bookmarkable_id: bookmarkable.id } },

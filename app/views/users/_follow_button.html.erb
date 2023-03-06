@@ -1,5 +1,9 @@
 <%= turbo_frame_tag "user_#{user.id}_follow_button" do %>
-  <% if following?(user) %>
+  <% if !user_signed_in? %>
+    <%= link_to 'Добавить в друзья', new_user_session_path,
+                class: 'btn btn-sm btn-outline-success',
+                data: { turbo: false } %>
+  <% elsif following?(user) %>
     <%= button_to 'Удалить из друзей', users_unfollow_path(id: user.id),
                   method: :delete, class: 'btn btn-sm btn-outline-danger' %>
   <% else %>
