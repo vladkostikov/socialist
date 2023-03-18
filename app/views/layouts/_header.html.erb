@@ -1,52 +1,48 @@
-<div class="row mb-4 bg-white mx-auto">
-  <div class="container">
-    <div class="container px-0 py-1">
-      <header class="d-flex flex-wrap align-items-center justify-content-center">
-        <ul class="nav col-md-2">
-          <%= link_to root_path, data: { turbo: false } do %>
-            <%= image_tag 'logo.svg', class: 'pe-5', size: '200x38' %>
-          <% end %>
-        </ul>
+<div class="container-fluid mb-4 bg-white mx-auto">
+  <header class="container px-0 py-1 d-flex flex-wrap align-items-center justify-content-center">
+    <ul class="nav col-md-2">
+      <%= link_to root_path, data: { turbo: false } do %>
+        <%= image_tag 'logo.svg', class: 'pe-5', size: '200x38' %>
+      <% end %>
+    </ul>
 
-        <ul class="nav me-auto">
-          <li><%= render partial: 'users/search_form' %></li>
-        </ul>
+    <ul class="nav me-auto">
+      <li><%= render partial: 'users/search_form' %></li>
+    </ul>
 
-        <div class="col-auto text-end">
-          <% if user_signed_in? %>
-            <div class="dropdown text-end dropdown-menu-end">
-              <a href=""
-                 class="d-block link-dark text-decoration-none dropdown-toggle"
-                 data-bs-toggle="dropdown"
-                 aria-expanded="false"
-                 role="button">
-                <%= image_tag user_avatar(current_user, 100),
-                              class: 'rounded-circle', size: '32x32' %>
-              </a>
-              <ul class="dropdown-menu text-small">
-                <li><%= link_to 'Профиль', current_user,
-                              class: 'dropdown-item', data: { turbo: false } %></li>
+    <div class="col-auto text-end">
+      <% if user_signed_in? %>
+        <div class="dropdown text-end dropdown-menu-end">
+          <a href=""
+             class="d-block link-dark text-decoration-none dropdown-toggle"
+             data-bs-toggle="dropdown"
+             aria-expanded="false"
+             role="button">
+            <%= image_tag user_avatar(current_user, 100),
+                          class: 'rounded-circle', size: '32x32' %>
+          </a>
+          <ul class="dropdown-menu text-small">
+            <li><%= link_to 'Профиль', current_user,
+                          class: 'dropdown-item', data: { turbo: false } %></li>
 
-                <li><%= link_to 'Настройки', edit_user_registration_path,
-                              class: 'dropdown-item', data: { turbo: false } %></li>
+            <li><%= link_to 'Настройки', edit_user_registration_path,
+                          class: 'dropdown-item', data: { turbo: false } %></li>
 
-                <li><hr class="dropdown-divider"></li>
+            <li><hr class="dropdown-divider"></li>
 
-                <li><%= link_to 'Выйти', destroy_user_session_path,
-                              class: 'dropdown-item text-danger',
-                              data: { turbo_method: :delete,
-                                      turbo_confirm: 'Вы точно хотите выйти?'} %>
-                </li>
-              </ul>
-            </div>
-          <% else %>
-            <a href="<%= new_user_session_path %>" type="button"
-               class="btn btn-outline-primary me-0">Вход</a>
-            <a href="<%= new_user_registration_path %>" type="button"
-               class="btn btn-outline-success me-0">Регистрация</a>
-          <% end %>
+            <li><%= link_to 'Выйти', destroy_user_session_path,
+                          class: 'dropdown-item text-danger',
+                          data: { turbo_method: :delete,
+                                  turbo_confirm: 'Вы точно хотите выйти?'} %>
+            </li>
+          </ul>
         </div>
-      </header>
+      <% else %>
+        <%= link_to 'Вход', new_user_session_path,
+                    class: 'btn btn-outline-primary me-0' %>
+        <%= link_to 'Регистрация', new_user_registration_path,
+                    class: 'btn btn-outline-success me-0' %>
+      <% end %>
     </div>
-  </div>
+  </header>
 </div>
